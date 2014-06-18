@@ -35,7 +35,7 @@ public class MainNetParams extends NetworkParameters {
         addressHeader = 0;
         p2shHeader = 5;
         acceptableAddressCodes = new int[] { addressHeader, p2shHeader };
-        port = 8333;
+        port = 2014130531;
         packetMagic = 0xf9beb4d9L;
         genesisBlock.setDifficultyTarget(0x1d00ffffL);
         genesisBlock.setTime(1231006505L);
@@ -58,11 +58,6 @@ public class MainNetParams extends NetworkParameters {
         checkpoints.put(200000, new Sha256Hash("000000000000034a7dedef4a161fa058a2d67a173a90155f3a2fe6fc132e0ebf"));
 
         dnsSeeds = new String[] {
-                "seed.bitcoin.sipa.be",        // Pieter Wuille
-                "dnsseed.bluematt.me",         // Matt Corallo
-                "dnsseed.bitcoin.dashjr.org",  // Luke Dashjr
-                "seed.bitcoinstats.com",       // Chris Decker
-                "seed.bitnodes.io",            // Addy Yeow
         };
     }
 
