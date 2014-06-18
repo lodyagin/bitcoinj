@@ -58,11 +58,6 @@ public class MainNetParams extends NetworkParameters {
         checkpoints.put(200000, new Sha256Hash("000000000000034a7dedef4a161fa058a2d67a173a90155f3a2fe6fc132e0ebf"));
 
         dnsSeeds = new String[] {
-                "seed.bitcoin.sipa.be",        // Pieter Wuille
-                "dnsseed.bluematt.me",         // Matt Corallo
-                "dnsseed.bitcoin.dashjr.org",  // Luke Dashjr
-                "seed.bitcoinstats.com",       // Chris Decker
-                "seed.bitnodes.io",            // Addy Yeow
         };
     }
 
