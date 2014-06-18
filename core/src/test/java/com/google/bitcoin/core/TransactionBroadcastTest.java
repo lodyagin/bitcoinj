@@ -163,7 +163,7 @@ public class TransactionBroadcastTest extends TestWithPeerGroup {
         transactions[0] = null;
         Transaction t1 = (Transaction) outbound(p1);
         assertNotNull(t1);
-        // 49 BTC in change.
+        // 49 ZYZ in change.
         assertEquals(Utils.toNanoCoins(49, 0), t1.getValueSentToMe(wallet));
         // The future won't complete until it's heard back from the network on p2.
         InventoryMessage inv = new InventoryMessage(params);
