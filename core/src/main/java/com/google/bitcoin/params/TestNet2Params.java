@@ -30,7 +30,7 @@ public class TestNet2Params extends NetworkParameters {
         super();
         id = ID_TESTNET;
         packetMagic = 0xfabfb5daL;
-        port = 18333;
+        port = 2014130539;
         addressHeader = 111;
         p2shHeader = 196;
         acceptableAddressCodes = new int[] { addressHeader, p2shHeader };
