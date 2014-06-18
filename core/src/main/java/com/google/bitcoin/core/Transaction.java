@@ -38,13 +38,13 @@ import static com.google.common.base.Preconditions.*;
 
 /**
  * <p>A transaction represents the movement of coins from some addresses to some other addresses. It can also represent
- * the minting of new coins. A Transaction object corresponds to the equivalent in the Bitcoin C++ implementation.</p>
+ * the minting of new coins. A Transaction object corresponds to the equivalent in the Xxxxxxx C++ implementation.</p>
  *
- * <p>Transactions are the fundamental atoms of Bitcoin and have many powerful features. Read
+ * <p>Transactions are the fundamental atoms of Xxxxxxx and have many powerful features. Read
  * <a href="http://code.google.com/p/bitcoinj/wiki/WorkingWithTransactions">"Working with transactions"</a> in the
  * documentation to learn more about how to use this class.</p>
  *
- * <p>All Bitcoin transactions are at risk of being reversed, though the risk is much less than with traditional payment
+ * <p>All Xxxxxxx transactions are at risk of being reversed, though the risk is much less than with traditional payment
  * systems. Transactions have <i>confidence levels</i>, which help you decide whether to trust a transaction or not.
  * Whether to trust a transaction is something that needs to be decided on a case by case basis - a rule that makes 
  * sense for selling MP3s might not make sense for selling cars, or accepting payments from a family member. If you
@@ -162,7 +162,7 @@ public class Transaction extends ChildMessage implements Serializable {
     /**
      * Creates a transaction by reading payload starting from offset bytes in. Length of a transaction is fixed.
      * @param params NetworkParameters object.
-     * @param msg Bitcoin protocol formatted byte array containing message content.
+     * @param msg Xxxxxxx protocol formatted byte array containing message content.
      * @param offset The location of the first msg byte within the array.
      * @param parseLazy Whether to perform a full parse immediately or delay until a read is requested.
      * @param parseRetain Whether to retain the backing byte array for quick reserialization.  
@@ -197,7 +197,7 @@ public class Transaction extends ChildMessage implements Serializable {
     }
 
     /**
-     * Used by BitcoinSerializer.  The serializer has to calculate a hash for checksumming so to
+     * Used by XxxxxxxSerializer.  The serializer has to calculate a hash for checksumming so to
      * avoid wasting the considerable effort a set method is provided so the serializer can set it.
      *
      * No verification is performed on this hash.
@@ -543,7 +543,7 @@ public class Transaction extends ChildMessage implements Serializable {
 
     /**
      * A coinbase transaction is one that creates a new coin. They are the first transaction in each block and their
-     * value is determined by a formula that all implementations of Bitcoin share. In 2011 the value of a coinbase
+     * value is determined by a formula that all implementations of Xxxxxxx share. In 2011 the value of a coinbase
      * transaction is 50 coins, but in future it will be less. A coinbase transaction is defined not only by its
      * position in a block but by the data in the inputs.
      */
@@ -689,7 +689,7 @@ public class Transaction extends ChildMessage implements Serializable {
 
     /**
      * Adds a new and fully signed input for the given parameters. Note that this method is <b>not</b> thread safe
-     * and requires external synchronization. Please refer to general documentation on Bitcoin scripting and contracts
+     * and requires external synchronization. Please refer to general documentation on Xxxxxxx scripting and contracts
      * to understand the values of sigHash and anyoneCanPay: otherwise you can use the other form of this method
      * that sets them to typical defaults.
      *
@@ -914,7 +914,7 @@ public class Transaction extends ChildMessage implements Serializable {
      * is simplified is specified by the type and anyoneCanPay parameters.</p>
      *
      * <p>You don't normally ever need to call this yourself. It will become more useful in future as the contracts
-     * features of Bitcoin are developed.</p>
+     * features of Xxxxxxx are developed.</p>
      *
      * @param inputIndex input the signature is being calculated for. Tx signatures are always relative to an input.
      * @param connectedScript the bytes that should be in the given input during signing.
@@ -932,7 +932,7 @@ public class Transaction extends ChildMessage implements Serializable {
      * is simplified is specified by the type and anyoneCanPay parameters.</p>
      *
      * <p>You don't normally ever need to call this yourself. It will become more useful in future as the contracts
-     * features of Bitcoin are developed.</p>
+     * features of Xxxxxxx are developed.</p>
      *
      * @param inputIndex input the signature is being calculated for. Tx signatures are always relative to an input.
      * @param connectedScript the script that should be in the given input during signing.
@@ -970,7 +970,7 @@ public class Transaction extends ChildMessage implements Serializable {
             }
 
             // This step has no purpose beyond being synchronized with the reference clients bugs. OP_CODESEPARATOR
-            // is a legacy holdover from a previous, broken design of executing scripts that shipped in Bitcoin 0.1.
+            // is a legacy holdover from a previous, broken design of executing scripts that shipped in Xxxxxxx 0.1.
             // It was seriously flawed and would have let anyone take anyone elses money. Later versions switched to
             // the design we use today where scripts are executed independently but share a stack. This left the
             // OP_CODESEPARATOR instruction having no purpose as it was only meant to be used internally, not actually
@@ -996,7 +996,7 @@ public class Transaction extends ChildMessage implements Serializable {
                 // SIGHASH_SINGLE means only sign the output at the same index as the input (ie, my output).
                 if (inputIndex >= this.outputs.size()) {
                     // The input index is beyond the number of outputs, it's a buggy signature made by a broken
-                    // Bitcoin implementation. The reference client also contains a bug in handling this case:
+                    // Xxxxxxx implementation. The reference client also contains a bug in handling this case:
                     // any transaction output that is signed in this case will result in both the signed output
                     // and any future outputs to this public key being steal-able by anyone who has
                     // the resulting signature and the public key (both of which are part of the signed tx input).
@@ -1069,7 +1069,7 @@ public class Transaction extends ChildMessage implements Serializable {
     /**
      * Transactions can have an associated lock time, specified either as a block height or in seconds since the
      * UNIX epoch. A transaction is not allowed to be confirmed by miners until the lock time is reached, and
-     * since Bitcoin 0.8+ a transaction that did not end its lock period (non final) is considered to be non
+     * since Xxxxxxx 0.8+ a transaction that did not end its lock period (non final) is considered to be non
      * standard and won't be relayed or included in the memory pool either.
      */
     public long getLockTime() {
@@ -1080,7 +1080,7 @@ public class Transaction extends ChildMessage implements Serializable {
     /**
      * Transactions can have an associated lock time, specified either as a block height or in seconds since the
      * UNIX epoch. A transaction is not allowed to be confirmed by miners until the lock time is reached, and
-     * since Bitcoin 0.8+ a transaction that did not end its lock period (non final) is considered to be non
+     * since Xxxxxxx 0.8+ a transaction that did not end its lock period (non final) is considered to be non
      * standard and won't be relayed or included in the memory pool either.
      */
     public void setLockTime(long lockTime) {

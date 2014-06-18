@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Various constants that define the assembly-like scripting language that forms part of the Bitcoin protocol.
+ * Various constants that define the assembly-like scripting language that forms part of the Xxxxxxx protocol.
  * See {@link com.google.bitcoin.script.Script} for details. Also provides a method to convert them to a string.
  */
 public class ScriptOpCodes {

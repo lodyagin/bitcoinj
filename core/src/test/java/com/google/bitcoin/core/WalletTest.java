@@ -232,7 +232,7 @@ public class WalletTest extends TestWithWallet {
 
     private void basicSpendingCommon(Wallet wallet, Address toAddress, Address destination, boolean testEncryption) throws Exception {
         // We'll set up a wallet that receives a coin, then sends a coin of lesser value and keeps the change. We
-        // will attach a small fee. Because the Bitcoin protocol makes it difficult to determine the fee of an
+        // will attach a small fee. Because the Xxxxxxx protocol makes it difficult to determine the fee of an
         // arbitrary transaction in isolation, we'll check that the fee was set by examining the size of the change.
 
         // Receive some money as a pending transaction.
@@ -2286,7 +2286,7 @@ public class WalletTest extends TestWithWallet {
         ECKey dest = new ECKey();
         Wallet.SendRequest req = Wallet.SendRequest.emptyWallet(dest.toAddress(params));
         wallet.completeTx(req);
-        byte[] dummySig = TransactionSignature.dummy().encodeToBitcoin();
+        byte[] dummySig = TransactionSignature.dummy().encodeToXxxxxxx();
         // Selected inputs can be in any order.
         for (int i = 0; i < req.tx.getInputs().size(); i++) {
             TransactionInput input = req.tx.getInput(i);

@@ -32,7 +32,7 @@ import java.util.Map;
 import static com.google.bitcoin.core.Utils.COIN;
 
 /**
- * <p>NetworkParameters contains the data needed for working with an instantiation of a Bitcoin chain.</p>
+ * <p>NetworkParameters contains the data needed for working with an instantiation of a Xxxxxxx chain.</p>
  *
  * <p>This is an abstract class, concrete instantiations can be found in the params package. There are four:
  * one for the main network ({@link MainNetParams}), one for the public test network, and two others that are
@@ -250,7 +250,7 @@ public abstract class NetworkParameters implements Serializable {
     /**
      * <p>Genesis block for this chain.</p>
      *
-     * <p>The first block in every chain is a well known constant shared between all Bitcoin implemenetations. For a
+     * <p>The first block in every chain is a well known constant shared between all Xxxxxxx implemenetations. For a
      * block to be valid, it must be eventually possible to work backwards to the genesis block by following the
      * prevBlockHash pointers in the block headers.</p>
      *
@@ -296,7 +296,7 @@ public abstract class NetworkParameters implements Serializable {
     /**
      * How much time in seconds is supposed to pass between "interval" blocks. If the actual elapsed time is
      * significantly different from this value, the network difficulty formula will produce a different value. Both
-     * test and production Bitcoin networks use 2 weeks (1209600 seconds).
+     * test and production Xxxxxxx networks use 2 weeks (1209600 seconds).
      */
     public int getTargetTimespan() {
         return targetTimespan;
@@ -318,7 +318,7 @@ public abstract class NetworkParameters implements Serializable {
         return true;
     }
 
-    /** How many blocks pass between difficulty adjustment periods. Bitcoin standardises this to be 2015. */
+    /** How many blocks pass between difficulty adjustment periods. Xxxxxxx standardises this to be 2015. */
     public int getInterval() {
         return interval;
     }

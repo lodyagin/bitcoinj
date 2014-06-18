@@ -67,7 +67,7 @@ public class UtilsTest {
      * Test the bitcoinValueToPlainString amount formatter
      */
     @Test
-    public void testBitcoinValueToPlainString() {
+    public void testXxxxxxxValueToPlainString() {
         // null argument check
         try {
             bitcoinValueToPlainString(null);

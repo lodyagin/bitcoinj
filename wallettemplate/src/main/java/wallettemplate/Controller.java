@@ -13,7 +13,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import wallettemplate.controls.ClickableBitcoinAddress;
+import wallettemplate.controls.ClickableXxxxxxxAddress;
 
 import java.math.BigInteger;
 import java.util.Date;
@@ -31,7 +31,7 @@ public class Controller {
     public HBox controlsBox;
     public Label balance;
     public Button sendMoneyOutBtn;
-    public ClickableBitcoinAddress addressControl;
+    public ClickableXxxxxxxAddress addressControl;
 
     // Called by FXMLLoader.
     public void initialize() {
@@ -39,7 +39,7 @@ public class Controller {
         addressControl.setOpacity(0.0);
     }
 
-    public void onBitcoinSetup() {
+    public void onXxxxxxxSetup() {
         bitcoin.wallet().addEventListener(new BalanceUpdater());
         addressControl.setAddress(bitcoin.wallet().getKeys().get(0).toAddress(Main.params).toString());
         refreshBalanceLabel();

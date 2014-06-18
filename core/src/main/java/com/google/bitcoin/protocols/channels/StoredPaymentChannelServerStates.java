@@ -50,7 +50,7 @@ public class StoredPaymentChannelServerStates implements WalletExtension {
      * The offset between the refund transaction's lock time and the time channels will be automatically closed.
      * This defines a window during which we must get the last payment transaction verified, ie it should allow time for
      * network propagation and for the payment transaction to be included in a block. Note that the channel expire time
-     * is measured in terms of our local clock, and the refund transaction's lock time is measured in terms of Bitcoin
+     * is measured in terms of our local clock, and the refund transaction's lock time is measured in terms of Xxxxxxx
      * block header timestamps, which are allowed to drift up to two hours in the future, as measured by relaying nodes.
      */
     public static final long CHANNEL_EXPIRE_OFFSET = -2*60*60;

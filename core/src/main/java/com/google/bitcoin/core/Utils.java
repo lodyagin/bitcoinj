@@ -41,7 +41,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.util.concurrent.Uninterruptibles.sleepUninterruptibly;
 
 /**
- * A collection of various utility methods that are helpful for working with the Bitcoin protocol.
+ * A collection of various utility methods that are helpful for working with the Xxxxxxx protocol.
  * To enable debug logging from the library, run with -Dbitcoinj.logging=true on your command line.
  */
 public class Utils {
@@ -55,16 +55,16 @@ public class Utils {
         }
     }
 
-    /** The string that prefixes all text messages signed using Bitcoin keys. */
+    /** The string that prefixes all text messages signed using Xxxxxxx keys. */
     public static final String BITCOIN_SIGNED_MESSAGE_HEADER = "Bitcoin Signed Message:\n";
     public static final byte[] BITCOIN_SIGNED_MESSAGE_HEADER_BYTES = BITCOIN_SIGNED_MESSAGE_HEADER.getBytes(Charsets.UTF_8);
 
     // TODO: Replace this nanocoins business with something better.
 
     /**
-     * How many "nanocoins" there are in a Bitcoin.
+     * How many "nanocoins" there are in a Xxxxxxx.
      * <p/>
-     * A nanocoin is the smallest unit that can be transferred using Bitcoin.
+     * A nanocoin is the smallest unit that can be transferred using Xxxxxxx.
      * The term nanocoin is very misleading, though, because there are only 100 million
      * of them in a coin (whereas one would expect 1 billion.
      */
@@ -73,7 +73,7 @@ public class Utils {
     /**
      * How many "nanocoins" there are in 0.01 BitCoins.
      * <p/>
-     * A nanocoin is the smallest unit that can be transferred using Bitcoin.
+     * A nanocoin is the smallest unit that can be transferred using Xxxxxxx.
      * The term nanocoin is very misleading, though, because there are only 100 million
      * of them in a coin (whereas one would expect 1 billion).
      */
@@ -126,7 +126,7 @@ public class Utils {
         if (bigint.compareTo(BigInteger.ZERO) < 0)
             throw new ArithmeticException("Negative coins specified");
         if (bigint.compareTo(NetworkParameters.MAX_MONEY) > 0)
-            throw new ArithmeticException("Amount larger than the total quantity of Bitcoins possible specified.");
+            throw new ArithmeticException("Amount larger than the total quantity of Xxxxxxxs possible specified.");
         return bigint;
     }
 
@@ -195,7 +195,7 @@ public class Utils {
 
     /**
      * Calculates the SHA-256 hash of the given byte range, and then hashes the resulting hash again. This is
-     * standard procedure in Bitcoin. The resulting hash is in big endian form.
+     * standard procedure in Xxxxxxx. The resulting hash is in big endian form.
      */
     public static byte[] doubleDigest(byte[] input, int offset, int length) {
         synchronized (digest) {
@@ -444,7 +444,7 @@ public class Utils {
      * first byte as sign. Thus 0x1234560000 is compact 0x05123456 and 0xc0de000000 is compact 0x0600c0de. Compact
      * 0x05c0de00 would be -0x40de000000.</p>
      *
-     * <p>Bitcoin only uses this "compact" format for encoding difficulty targets, which are unsigned 256bit quantities.
+     * <p>Xxxxxxx only uses this "compact" format for encoding difficulty targets, which are unsigned 256bit quantities.
      * Thus, all the complexities of the sign bit and using base 256 are probably an implementation accident.</p>
      */
     public static BigInteger decodeCompactBits(long compact) {
@@ -571,7 +571,7 @@ public class Utils {
     /**
      * <p>Given a textual message, returns a byte buffer formatted as follows:</p>
      *
-     * <tt><p>[24] "Bitcoin Signed Message:\n" [message.length as a varint] message</p></tt>
+     * <tt><p>[24] "Xxxxxxx Signed Message:\n" [message.length as a varint] message</p></tt>
      */
     public static byte[] formatMessageForSigning(String message) {
         try {

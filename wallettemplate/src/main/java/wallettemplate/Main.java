@@ -98,7 +98,7 @@ public class Main extends Application {
         bitcoin.wallet().allowSpendingUnconfirmedTransactions();
         bitcoin.peerGroup().setMaxConnections(11);
         System.out.println(bitcoin.wallet());
-        controller.onBitcoinSetup();
+        controller.onXxxxxxxSetup();
         mainWindow.show();
     }
 

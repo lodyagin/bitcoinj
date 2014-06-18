@@ -37,7 +37,7 @@ public class PrivateKeys {
         // TODO: Assumes main network not testnet. Make it selectable.
         NetworkParameters params = MainNetParams.get();
         try {
-            // Decode the private key from Satoshis Base58 variant. If 51 characters long then it's from Bitcoins
+            // Decode the private key from Satoshis Base58 variant. If 51 characters long then it's from Xxxxxxxs
             // dumpprivkey command and includes a version byte and checksum, or if 52 characters long then it has 
             // compressed pub key. Otherwise assume it's a raw key.
             ECKey key;

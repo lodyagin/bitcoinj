@@ -1299,7 +1299,7 @@ public final class Protos {
    *
    * <pre>
    **
-   * A key used to control Bitcoin spending.
+   * A key used to control Xxxxxxx spending.
    *
    * Either the private key, the public key or both may be present.  It is recommended that
    * if the private key is provided that the public key is provided too because deriving it is slow.
@@ -1887,7 +1887,7 @@ public final class Protos {
      *
      * <pre>
      **
-     * A key used to control Bitcoin spending.
+     * A key used to control Xxxxxxx spending.
      *
      * Either the private key, the public key or both may be present.  It is recommended that
      * if the private key is provided that the public key is provided too because deriving it is slow.

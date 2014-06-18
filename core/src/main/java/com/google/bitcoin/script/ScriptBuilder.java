@@ -91,12 +91,12 @@ public class ScriptBuilder {
     /** Creates a scriptSig that can redeem a pay-to-address output. */
     public static Script createInputScript(TransactionSignature signature, ECKey pubKey) {
         byte[] pubkeyBytes = pubKey.getPubKey();
-        return new ScriptBuilder().data(signature.encodeToBitcoin()).data(pubkeyBytes).build();
+        return new ScriptBuilder().data(signature.encodeToXxxxxxx()).data(pubkeyBytes).build();
     }
 
     /** Creates a scriptSig that can redeem a pay-to-pubkey output. */
     public static Script createInputScript(TransactionSignature signature) {
-        return new ScriptBuilder().data(signature.encodeToBitcoin()).build();
+        return new ScriptBuilder().data(signature.encodeToXxxxxxx()).build();
     }
 
     /** Creates a program that requires at least N of the given keys to sign, using OP_CHECKMULTISIG. */
@@ -118,7 +118,7 @@ public class ScriptBuilder {
     public static Script createMultiSigInputScript(List<TransactionSignature> signatures) {
         List<byte[]> sigs = new ArrayList<byte[]>(signatures.size());
         for (TransactionSignature signature : signatures)
-            sigs.add(signature.encodeToBitcoin());
+            sigs.add(signature.encodeToXxxxxxx());
         return createMultiSigInputScriptBytes(sigs);
     }
 

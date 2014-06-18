@@ -28,7 +28,7 @@
     <artifactId>bitcoinj</artifactId>
 
     <name>bitcoinj</name>
-    <description>A Java Bitcoin library</description>
+    <description>A Java Xxxxxxx library</description>
 
     <packaging>jar</packaging>
 
@@ -125,7 +125,7 @@
                 </executions>
             </plugin>
 
-            <!-- Verify the dependency chain: see https://github.com/gary-rowe/BitcoinjEnforcerRules for
+            <!-- Verify the dependency chain: see https://github.com/gary-rowe/XxxxxxxjEnforcerRules for
                more information on this.
             -->
             <plugin>

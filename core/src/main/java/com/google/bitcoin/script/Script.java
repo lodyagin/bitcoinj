@@ -44,7 +44,7 @@ import static com.google.common.base.Preconditions.checkState;
 /**
  * <p>Programs embedded inside transactions that control redemption of payments.</p>
  *
- * <p>Bitcoin transactions don't specify what they do directly. Instead <a href="https://en.bitcoin.it/wiki/Script">a
+ * <p>Xxxxxxx transactions don't specify what they do directly. Instead <a href="https://en.bitcoin.it/wiki/Script">a
  * small binary stack language</a> is used to define programs that when evaluated return whether the transaction
  * "accepts" or rejects the other transactions connected to it.</p>
  *
@@ -289,7 +289,7 @@ public class Script {
 
     /**
      * For 2-element [input] scripts assumes that the paid-to-address can be derived from the public key.
-     * The concept of a "from address" isn't well defined in Bitcoin and you should not assume the sender of a
+     * The concept of a "from address" isn't well defined in Xxxxxxx and you should not assume the sender of a
      * transaction can actually receive coins on it. This method may be removed in future.
      */
     @Deprecated
@@ -477,7 +477,7 @@ public class Script {
      * <p>bitcoinj does not support creation of P2SH transactions today. The goal of P2SH is to allow short addresses
      * even for complex scripts (eg, multi-sig outputs) so they are convenient to work with in things like QRcodes or
      * with copy/paste, and also to minimize the size of the unspent output set (which improves performance of the
-     * Bitcoin system).</p>
+     * Xxxxxxx system).</p>
      */
     public boolean isPayToScriptHash() {
         // We have to check against the serialized form because BIP16 defines a P2SH output using an exact byte
@@ -1116,7 +1116,7 @@ public class Script {
         // TODO: Use int for indexes everywhere, we can't have that many inputs/outputs
         boolean sigValid = false;
         try {
-            TransactionSignature sig  = TransactionSignature.decodeFromBitcoin(sigBytes, false);
+            TransactionSignature sig  = TransactionSignature.decodeFromXxxxxxx(sigBytes, false);
             Sha256Hash hash = txContainingThis.hashForSignature(index, connectedScript, (byte) sig.sighashFlags);
             sigValid = ECKey.verify(hash.getBytes(), sig, pubKey);
         } catch (Exception e1) {
@@ -1182,7 +1182,7 @@ public class Script {
             // We could reasonably move this out of the loop, but because signature verification is significantly
             // more expensive than hashing, its not a big deal.
             try {
-                TransactionSignature sig = TransactionSignature.decodeFromBitcoin(sigs.getFirst(), false);
+                TransactionSignature sig = TransactionSignature.decodeFromXxxxxxx(sigs.getFirst(), false);
                 Sha256Hash hash = txContainingThis.hashForSignature(index, connectedScript, (byte) sig.sighashFlags);
                 if (ECKey.verify(hash.getBytes(), sig, pubKey))
                     sigs.pollFirst();
