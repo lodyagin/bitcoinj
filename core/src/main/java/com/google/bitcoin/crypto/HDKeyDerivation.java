@@ -48,7 +48,7 @@ public final class HDKeyDerivation {
      */
     public static DeterministicKey createMasterPrivateKey(byte[] seed) throws HDDerivationException {
         checkArgument(seed.length > 8, "Seed is too short and could be brute forced");
-        // Calculate I = HMAC-SHA512(key="Xxxxxxx seed", msg=S)
+        // Calculate I = HMAC-SHA512(key="Bitcoin seed", msg=S)
         byte[] i = HDUtils.hmacSha512(MASTER_HMAC_SHA512, seed);
         // Split I into two 32-byte sequences, Il and Ir.
         // Use Il as master secret key, and Ir as master chain code.

@@ -60,7 +60,7 @@ import static com.google.common.base.Preconditions.checkState;
  * when you already have the public or private parts. If you create a key with only the public part, you can check
  * signatures but not create them.</p>
  *
- * <p>ECKey also provides access to Xxxxxxx-Qt compatible text message signing, as accessible via the UI or JSON-RPC.
+ * <p>ECKey also provides access to Bitcoin-Qt compatible text message signing, as accessible via the UI or JSON-RPC.
  * This is slightly different to signing raw bytes - if you want to sign your own data and it won't be exposed as
  * text to people, you don't want to use this. If in doubt, ask on the mailing list.</p>
  *
@@ -71,7 +71,7 @@ import static com.google.common.base.Preconditions.checkState;
 public class ECKey implements Serializable {
     private static final Logger log = LoggerFactory.getLogger(ECKey.class);
 
-    /** The parameters of the secp256k1 curve that Xxxxxxx uses. */
+    /** The parameters of the secp256k1 curve that Bitcoin uses. */
     public static final ECDomainParameters CURVE;
 
     /**
@@ -84,7 +84,7 @@ public class ECKey implements Serializable {
     private static final long serialVersionUID = -728224901792295832L;
 
     static {
-        // All clients must agree on the curve to use by agreement. Xxxxxxx uses secp256k1.
+        // All clients must agree on the curve to use by agreement. Bitcoin uses secp256k1.
         X9ECParameters params = SECNamedCurves.getByName("secp256k1");
         CURVE = new ECDomainParameters(params.getCurve(), params.getG(), params.getN(), params.getH());
         HALF_CURVE_ORDER = params.getN().shiftRight(1);
@@ -139,7 +139,7 @@ public class ECKey implements Serializable {
     }
 
     /**
-     * Construct an ECKey from an ASN.1 encoded private key. These are produced by OpenSSL and stored by the Xxxxxxx
+     * Construct an ECKey from an ASN.1 encoded private key. These are produced by OpenSSL and stored by the Bitcoin
      * reference implementation in its wallet. Note that this is slow because it requires an EC point multiply.
      */
     public static ECKey fromASN1(byte[] asn1privkey) {
@@ -328,7 +328,7 @@ public class ECKey implements Serializable {
 
     /**
      * Groups the two components that make up a signature, and provides a way to encode to DER form, which is
-     * how ECDSA signatures are represented when embedded in other data structures in the Xxxxxxx protocol. The raw
+     * how ECDSA signatures are represented when embedded in other data structures in the Bitcoin protocol. The raw
      * components can be useful for doing further EC maths on them.
      */
     public static class ECDSASignature {
@@ -346,7 +346,7 @@ public class ECKey implements Serializable {
         /**
          * Will automatically adjust the S component to be less than or equal to half the curve order, if necessary.
          * This is required because for every signature (r,s) the signature (r, -s (mod N)) is a valid signature of
-         * the same message. However, we dislike the ability to modify the bits of a Xxxxxxx transaction after it's
+         * the same message. However, we dislike the ability to modify the bits of a Bitcoin transaction after it's
          * been signed, as that violates various assumed invariants. Thus in future only one of those forms will be
          * considered legal and the other will be banned.
          */
@@ -406,7 +406,7 @@ public class ECKey implements Serializable {
     }
 
     /**
-     * Signs the given hash and returns the R and S components as BigIntegers. In the Xxxxxxx protocol, they are
+     * Signs the given hash and returns the R and S components as BigIntegers. In the Bitcoin protocol, they are
      * usually encoded using DER format, so you want {@link com.google.bitcoin.core.ECKey.ECDSASignature#toASN1()}
      * instead. However sometimes the independent components can be useful, for instance, if you're doing to do
      * further EC maths on them.
@@ -425,7 +425,7 @@ public class ECKey implements Serializable {
     public static boolean FAKE_SIGNATURES = false;
 
     /**
-     * Signs the given hash and returns the R and S components as BigIntegers. In the Xxxxxxx protocol, they are
+     * Signs the given hash and returns the R and S components as BigIntegers. In the Bitcoin protocol, they are
      * usually encoded using DER format, so you want {@link com.google.bitcoin.core.ECKey.ECDSASignature#encodeToDER()}
      * instead. However sometimes the independent components can be useful, for instance, if you're doing to do further
      * EC maths on them.
@@ -586,7 +586,7 @@ public class ECKey implements Serializable {
     }
 
     /**
-     * Signs a text message using the standard Xxxxxxx messaging signing format and returns the signature as a base64
+     * Signs a text message using the standard Bitcoin messaging signing format and returns the signature as a base64
      * encoded string.
      *
      * @throws IllegalStateException if this ECKey does not have the private part.
@@ -597,7 +597,7 @@ public class ECKey implements Serializable {
     }
 
     /**
-     * Signs a text message using the standard Xxxxxxx messaging signing format and returns the signature as a base64
+     * Signs a text message using the standard Bitcoin messaging signing format and returns the signature as a base64
      * encoded string.
      *
      * @throws IllegalStateException if this ECKey does not have the private part.
@@ -629,14 +629,14 @@ public class ECKey implements Serializable {
     }
 
     /**
-     * Given an arbitrary piece of text and a Xxxxxxx-format message signature encoded in base64, returns an ECKey
+     * Given an arbitrary piece of text and a Bitcoin-format message signature encoded in base64, returns an ECKey
      * containing the public key that was used to sign it. This can then be compared to the expected public key to
-     * determine if the signature was correct. These sorts of signatures are compatible with the Xxxxxxx-Qt/bitcoind
+     * determine if the signature was correct. These sorts of signatures are compatible with the Bitcoin-Qt/bitcoind
      * format generated by signmessage/verifymessage RPCs and GUI menu options. They are intended for humans to verify
      * their communications with each other, hence the base64 format and the fact that the input is text.
      *
      * @param message Some piece of human readable text.
-     * @param signatureBase64 The Xxxxxxx-format message signature in base64
+     * @param signatureBase64 The Bitcoin-format message signature in base64
      * @throws SignatureException If the public key could not be recovered or if there was a signature format error.
      */
     public static ECKey signedMessageToKey(String message, String signatureBase64) throws SignatureException {

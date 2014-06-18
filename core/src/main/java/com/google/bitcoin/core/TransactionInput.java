@@ -104,7 +104,7 @@ public class TransactionInput extends ChildMessage implements Serializable {
     /**
      * Deserializes an input message. This is usually part of a transaction message.
      * @param params NetworkParameters object.
-     * @param msg Xxxxxxx protocol formatted byte array containing message content.
+     * @param msg Bitcoin protocol formatted byte array containing message content.
      * @param offset The location of the first msg byte within the array.
      * @param parseLazy Whether to perform a full parse immediately or delay until a read is requested.
      * @param parseRetain Whether to retain the backing byte array for quick reserialization.  
@@ -178,7 +178,7 @@ public class TransactionInput extends ChildMessage implements Serializable {
 
     /**
      * Convenience method that returns the from address of this input by parsing the scriptSig. The concept of a
-     * "from address" is not well defined in Xxxxxxx and you should not assume that senders of a transaction can
+     * "from address" is not well defined in Bitcoin and you should not assume that senders of a transaction can
      * actually receive coins on the same address they used to sign (e.g. this is not true for shared wallets).
      */
     @Deprecated
@@ -193,7 +193,7 @@ public class TransactionInput extends ChildMessage implements Serializable {
     /**
      * Sequence numbers allow participants in a multi-party transaction signing protocol to create new versions of the
      * transaction independently of each other. Newer versions of a transaction can replace an existing version that's
-     * in nodes memory pools if the existing version is time locked. See the Contracts page on the Xxxxxxx wiki for
+     * in nodes memory pools if the existing version is time locked. See the Contracts page on the Bitcoin wiki for
      * examples of how you can use this feature to build contract protocols. Note that as of 2012 the tx replacement
      * feature is disabled so sequence numbers are unusable.
      */
@@ -205,7 +205,7 @@ public class TransactionInput extends ChildMessage implements Serializable {
     /**
      * Sequence numbers allow participants in a multi-party transaction signing protocol to create new versions of the
      * transaction independently of each other. Newer versions of a transaction can replace an existing version that's
-     * in nodes memory pools if the existing version is time locked. See the Contracts page on the Xxxxxxx wiki for
+     * in nodes memory pools if the existing version is time locked. See the Contracts page on the Bitcoin wiki for
      * examples of how you can use this feature to build contract protocols. Note that as of 2012 the tx replacement
      * feature is disabled so sequence numbers are unusable.
      */

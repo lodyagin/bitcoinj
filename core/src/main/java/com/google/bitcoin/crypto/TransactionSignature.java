@@ -72,7 +72,7 @@ public class TransactionSignature extends ECKey.ECDSASignature {
      * the reference client. DER and the SIGHASH encoding allow for quite some flexibility in how the same structures
      * are encoded, and this can open up novel attacks in which a man in the middle takes a transaction and then
      * changes its signature such that the transaction hash is different but it's still valid. This can confuse wallets
-     * and generally violates people's mental model of how Xxxxxxx should work, thus, non-canonical signatures are now
+     * and generally violates people's mental model of how Bitcoin should work, thus, non-canonical signatures are now
      * not relayed by default.
      */
     public static boolean isEncodingCanonical(byte[] signature) {
@@ -135,10 +135,10 @@ public class TransactionSignature extends ECKey.ECDSASignature {
 
     /**
      * What we get back from the signer are the two components of a signature, r and s. To get a flat byte stream
-     * of the type used by Xxxxxxx we have to encode them using DER encoding, which is just a way to pack the two
+     * of the type used by Bitcoin we have to encode them using DER encoding, which is just a way to pack the two
      * components into a structure, and then we append a byte to the end for the sighash flags.
      */
-    public byte[] encodeToXxxxxxx() {
+    public byte[] encodeToBitcoin() {
         try {
             ByteArrayOutputStream bos = derByteStream();
             bos.write(sighashFlags);
@@ -152,8 +152,8 @@ public class TransactionSignature extends ECKey.ECDSASignature {
      * Returns a decoded signature.
      * @throws RuntimeException if the signature is invalid or unparseable in some way.
      */
-    public static TransactionSignature decodeFromXxxxxxx(byte[] bytes, boolean requireCanonical) throws VerificationException {
-        // Xxxxxxx encoding is DER signature + sighash byte.
+    public static TransactionSignature decodeFromBitcoin(byte[] bytes, boolean requireCanonical) throws VerificationException {
+        // Bitcoin encoding is DER signature + sighash byte.
         if (requireCanonical && !isEncodingCanonical(bytes))
             throw new VerificationException("Signature encoding is not canonical.");
         ECKey.ECDSASignature sig;
@@ -163,7 +163,7 @@ public class TransactionSignature extends ECKey.ECDSASignature {
             throw new VerificationException("Could not decode DER", e);
         }
         TransactionSignature tsig = new TransactionSignature(sig.r, sig.s);
-        // In Xxxxxxx, any value of the final byte is valid, but not necessarily canonical. See javadocs for
+        // In Bitcoin, any value of the final byte is valid, but not necessarily canonical. See javadocs for
         // isEncodingCanonical to learn more about this.
         tsig.sighashFlags = bytes[bytes.length - 1];
         return tsig;

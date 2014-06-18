@@ -873,7 +873,7 @@ public class PeerTest extends TestWithNetworkConnections {
             }
         });
         final NetworkParameters params = TestNet3Params.get();
-        XxxxxxxSerializer serializer = new XxxxxxxSerializer(params);
+        BitcoinSerializer serializer = new BitcoinSerializer(params);
         // Now write some bogus truncated message.
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         serializer.serialize("inv", new InventoryMessage(params) {

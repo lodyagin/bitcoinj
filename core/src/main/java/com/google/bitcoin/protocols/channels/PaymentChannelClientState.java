@@ -46,7 +46,7 @@ import static com.google.common.base.Preconditions.*;
  * by {@link PaymentChannelServerState} and {@link PaymentChannelClientConnection} implements a network protocol
  * suitable for TCP/IP connections which moves this class through each state. We say that the party who is sending funds
  * is the <i>client</i> or <i>initiating party</i>. The party that is receiving the funds is the <i>server</i> or
- * <i>receiving party</i>. Although the underlying Xxxxxxx protocol is capable of more complex relationships than that,
+ * <i>receiving party</i>. Although the underlying Bitcoin protocol is capable of more complex relationships than that,
  * this class implements only the simplest case.</p>
  *
  * <p>A channel has an expiry parameter. If the server halts after the multi-signature contract which locks
@@ -259,7 +259,7 @@ public class PaymentChannelClientState {
         // Build a refund transaction that protects us in the case of a bad server that's just trying to cause havoc
         // by locking up peoples money (perhaps as a precursor to a ransom attempt). We time lock it so the server
         // has an assurance that we cannot take back our money by claiming a refund before the channel closes - this
-        // relies on the fact that since Xxxxxxx 0.8 time locked transactions are non-final. This will need to change
+        // relies on the fact that since Bitcoin 0.8 time locked transactions are non-final. This will need to change
         // in future as it breaks the intended design of timelocking/tx replacement, but for now it simplifies this
         // specific protocol somewhat.
         refundTx = new Transaction(params);
@@ -327,7 +327,7 @@ public class PaymentChannelClientState {
     public synchronized void provideRefundSignature(byte[] theirSignature) throws VerificationException {
         checkNotNull(theirSignature);
         checkState(state == State.WAITING_FOR_SIGNED_REFUND);
-        TransactionSignature theirSig = TransactionSignature.decodeFromXxxxxxx(theirSignature, true);
+        TransactionSignature theirSig = TransactionSignature.decodeFromBitcoin(theirSignature, true);
         if (theirSig.sigHashMode() != Transaction.SigHash.NONE || !theirSig.anyoneCanPay())
             throw new VerificationException("Refund signature was not SIGHASH_NONE|SIGHASH_ANYONECANPAY");
         // Sign the refund transaction ourselves.

@@ -101,7 +101,7 @@ public class LazyParseByteCacheTest {
 
         Block b1 = createFakeBlock(blockStore, tx1, tx2).block;
 
-        XxxxxxxSerializer bs = new XxxxxxxSerializer(unitTestParams);
+        BitcoinSerializer bs = new BitcoinSerializer(unitTestParams);
         
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bs.serialize(tx1, bos);
@@ -173,16 +173,16 @@ public class LazyParseByteCacheTest {
     public void testBlock(byte[] blockBytes, boolean isChild, boolean lazy, boolean retain) throws Exception {
         //reference serializer to produce comparison serialization output after changes to
         //message structure.
-        XxxxxxxSerializer bsRef = new XxxxxxxSerializer(unitTestParams, false, false);
+        BitcoinSerializer bsRef = new BitcoinSerializer(unitTestParams, false, false);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         
-        XxxxxxxSerializer bs = new XxxxxxxSerializer(unitTestParams, lazy, retain);
+        BitcoinSerializer bs = new BitcoinSerializer(unitTestParams, lazy, retain);
         Block b1;
         Block bRef;
         b1 = (Block) bs.deserialize(ByteBuffer.wrap(blockBytes));
         bRef = (Block) bsRef.deserialize(ByteBuffer.wrap(blockBytes));
         
-        //verify our reference XxxxxxxSerializer produces matching byte array.
+        //verify our reference BitcoinSerializer produces matching byte array.
         bos.reset();
         bsRef.serialize(bRef, bos);
         assertTrue(Arrays.equals(bos.toByteArray(), blockBytes));
@@ -409,16 +409,16 @@ public class LazyParseByteCacheTest {
 
         //reference serializer to produce comparison serialization output after changes to
         //message structure.
-        XxxxxxxSerializer bsRef = new XxxxxxxSerializer(params, false, false);
+        BitcoinSerializer bsRef = new BitcoinSerializer(params, false, false);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         
-        XxxxxxxSerializer bs = new XxxxxxxSerializer(params, lazy, retain);
+        BitcoinSerializer bs = new BitcoinSerializer(params, lazy, retain);
         Transaction t1;
         Transaction tRef;
         t1 = (Transaction) bs.deserialize(ByteBuffer.wrap(txBytes));
         tRef = (Transaction) bsRef.deserialize(ByteBuffer.wrap(txBytes));
         
-        //verify our reference XxxxxxxSerializer produces matching byte array.
+        //verify our reference BitcoinSerializer produces matching byte array.
         bos.reset();
         bsRef.serialize(tRef, bos);
         assertTrue(Arrays.equals(bos.toByteArray(), txBytes));
@@ -477,7 +477,7 @@ public class LazyParseByteCacheTest {
         
     }
     
-    private void serDeser(XxxxxxxSerializer bs, Message message, byte[] sourceBytes, byte[] containedBytes, byte[] containingBytes) throws Exception {
+    private void serDeser(BitcoinSerializer bs, Message message, byte[] sourceBytes, byte[] containedBytes, byte[] containingBytes) throws Exception {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bs.serialize(message, bos);
         byte[] b1 = bos.toByteArray();

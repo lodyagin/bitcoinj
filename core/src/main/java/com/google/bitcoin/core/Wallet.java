@@ -81,7 +81,7 @@ import static com.google.common.base.Preconditions.*;
 /**
  * <p>A Wallet stores keys and a record of transactions that send and receive value from those keys. Using these,
  * it is able to create new transactions that spend the recorded transactions, and this is the fundamental operation
- * of the Xxxxxxx protocol.</p>
+ * of the Bitcoin protocol.</p>
  *
  * <p>To learn more about this class, read <b><a href="http://code.google.com/p/bitcoinj/wiki/WorkingWithTheWallet">
  *     working with the wallet.</a></b></p>
@@ -1116,9 +1116,9 @@ public class Wallet implements Serializable, BlockChainListener, PeerFilterProvi
                     // so the exact nature of the mutation can be examined.
                     log.warn("Saw two pending transactions double spend each other");
                     log.warn("  offending input is input {}", tx.getInputs().indexOf(input));
-                    log.warn("{}: {}", tx.getHash(), new String(Hex.encode(tx.unsafeXxxxxxxSerialize())));
+                    log.warn("{}: {}", tx.getHash(), new String(Hex.encode(tx.unsafeBitcoinSerialize())));
                     Transaction other = input.getConnectedOutput().getSpentBy().getParentTransaction();
-                    log.warn("{}: {}", other.getHash(), new String(Hex.encode(tx.unsafeXxxxxxxSerialize())));
+                    log.warn("{}: {}", other.getHash(), new String(Hex.encode(tx.unsafeBitcoinSerialize())));
                 }
             } else if (result == TransactionInput.ConnectionResult.SUCCESS) {
                 // Otherwise we saw a transaction spend our coins, but we didn't try and spend them ourselves yet.
@@ -1558,7 +1558,7 @@ public class Wallet implements Serializable, BlockChainListener, PeerFilterProvi
 
     /** A SendResult is returned to you as part of sending coins to a recipient. */
     public static class SendResult {
-        /** The Xxxxxxx transaction message that moves the money. */
+        /** The Bitcoin transaction message that moves the money. */
         public Transaction tx;
         /** A future that will complete once the tx message has been successfully broadcast to the network. */
         public ListenableFuture<Transaction> broadcastComplete;
@@ -1604,7 +1604,7 @@ public class Wallet implements Serializable, BlockChainListener, PeerFilterProvi
         /**
          * <p>A transaction can have a fee attached, which is defined as the difference between the input values
          * and output values. Any value taken in that is not provided to an output can be claimed by a miner. This
-         * is how mining is incentivized in later years of the Xxxxxxx system when inflation drops. It also provides
+         * is how mining is incentivized in later years of the Bitcoin system when inflation drops. It also provides
          * a way for people to prioritize their transactions over others and is used as a way to make denial of service
          * attacks expensive.</p>
          *
@@ -1623,7 +1623,7 @@ public class Wallet implements Serializable, BlockChainListener, PeerFilterProvi
         /**
          * <p>A transaction can have a fee attached, which is defined as the difference between the input values
          * and output values. Any value taken in that is not provided to an output can be claimed by a miner. This
-         * is how mining is incentivized in later years of the Xxxxxxx system when inflation drops. It also provides
+         * is how mining is incentivized in later years of the Bitcoin system when inflation drops. It also provides
          * a way for people to prioritize their transactions over others and is used as a way to make denial of service
          * attacks expensive.</p>
          *
@@ -1742,7 +1742,7 @@ public class Wallet implements Serializable, BlockChainListener, PeerFilterProvi
      * <p>You MUST ensure that nanocoins is not smaller than {@link Transaction#MIN_NONDUST_OUTPUT} or the transaction
      * will almost certainly be rejected by the network as dust.</p>
      *
-     * @param address       The Xxxxxxx address to send the money to.
+     * @param address       The Bitcoin address to send the money to.
      * @param nanocoins     How much currency to send, in nanocoins.
      * @return either the created Transaction or null if there are insufficient coins.
      * coins as spent until commitTx is called on the result.
@@ -3664,7 +3664,7 @@ public class Wallet implements Serializable, BlockChainListener, PeerFilterProvi
 
     /**
      * <p>Specifies that the given {@link TransactionBroadcaster}, typically a {@link PeerGroup}, should be used for
-     * sending transactions to the Xxxxxxx network by default. Some sendCoins methods let you specify a broadcaster
+     * sending transactions to the Bitcoin network by default. Some sendCoins methods let you specify a broadcaster
      * explicitly, in that case, they don't use this broadcaster. If null is specified then the wallet won't attempt
      * to broadcast transactions itself.</p>
      *

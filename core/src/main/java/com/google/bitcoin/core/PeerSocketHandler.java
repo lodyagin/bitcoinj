@@ -42,7 +42,7 @@ import static com.google.common.base.Preconditions.*;
 public abstract class PeerSocketHandler extends AbstractTimeoutHandler implements StreamParser {
     private static final Logger log = LoggerFactory.getLogger(PeerSocketHandler.class);
 
-    private final XxxxxxxSerializer serializer;
+    private final BitcoinSerializer serializer;
     protected PeerAddress peerAddress;
     // If we close() before we know our writeTarget, set this to true to call writeTarget.closeConnection() right away.
     private boolean closePending = false;
@@ -54,17 +54,17 @@ public abstract class PeerSocketHandler extends AbstractTimeoutHandler implement
     // messages which are larger than the read buffer, we have to keep a temporary buffer with its bytes.
     private byte[] largeReadBuffer;
     private int largeReadBufferPos;
-    private XxxxxxxSerializer.XxxxxxxPacketHeader header;
+    private BitcoinSerializer.BitcoinPacketHeader header;
 
     private Lock lock = Threading.lock("PeerSocketHandler");
 
     public PeerSocketHandler(NetworkParameters params, InetSocketAddress remoteIp) {
-        serializer = new XxxxxxxSerializer(checkNotNull(params));
+        serializer = new BitcoinSerializer(checkNotNull(params));
         this.peerAddress = new PeerAddress(remoteIp);
     }
 
     public PeerSocketHandler(NetworkParameters params, PeerAddress peerAddress) {
-        serializer = new XxxxxxxSerializer(checkNotNull(params));
+        serializer = new BitcoinSerializer(checkNotNull(params));
         this.peerAddress = checkNotNull(peerAddress);
     }
 
@@ -121,7 +121,7 @@ public abstract class PeerSocketHandler extends AbstractTimeoutHandler implement
     @Override
     public int receiveBytes(ByteBuffer buff) {
         checkArgument(buff.position() == 0 &&
-                buff.capacity() >= XxxxxxxSerializer.XxxxxxxPacketHeader.HEADER_LENGTH + 4);
+                buff.capacity() >= BitcoinSerializer.BitcoinPacketHeader.HEADER_LENGTH + 4);
         try {
             // Repeatedly try to deserialize messages until we hit a BufferUnderflowException
             for (int i = 0; true; i++) {

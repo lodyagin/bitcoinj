@@ -218,7 +218,7 @@ public class PaymentChannelClient implements IPaymentChannelClient {
             // server-requested dust limit was already sanity checked by this point.
             PaymentChannelClientState.IncrementedPayment payment = state().incrementPaymentBy(BigInteger.valueOf(minPayment));
             Protos.UpdatePayment.Builder initialMsg = contractMsg.getInitialPaymentBuilder();
-            initialMsg.setSignature(ByteString.copyFrom(payment.signature.encodeToXxxxxxx()));
+            initialMsg.setSignature(ByteString.copyFrom(payment.signature.encodeToBitcoin()));
             initialMsg.setClientChangeValue(state.getValueRefunded().longValue());
         } catch (ValueOutOfRangeException e) {
             throw new IllegalStateException(e);  // This cannot happen.
@@ -456,7 +456,7 @@ public class PaymentChannelClient implements IPaymentChannelClient {
     /**
      * Increments the total value which we pay the server. Note that the amount of money sent may not be the same as the
      * amount of money actually requested. It can be larger if the amount left over in the channel would be too small to
-     * be accepted by the Xxxxxxx network. ValueOutOfRangeException will be thrown, however, if there's not enough money
+     * be accepted by the Bitcoin network. ValueOutOfRangeException will be thrown, however, if there's not enough money
      * left in the channel to make the payment at all. Only one payment can be in-flight at once. You have to ensure
      * you wait for the previous increase payment future to complete before incrementing the payment again.
      *
@@ -478,7 +478,7 @@ public class PaymentChannelClient implements IPaymentChannelClient {
 
             PaymentChannelClientState.IncrementedPayment payment = state().incrementPaymentBy(size);
             Protos.UpdatePayment.Builder updatePaymentBuilder = Protos.UpdatePayment.newBuilder()
-                    .setSignature(ByteString.copyFrom(payment.signature.encodeToXxxxxxx()))
+                    .setSignature(ByteString.copyFrom(payment.signature.encodeToBitcoin()))
                     .setClientChangeValue(state.getValueRefunded().longValue());
 
             increasePaymentFuture = SettableFuture.create();

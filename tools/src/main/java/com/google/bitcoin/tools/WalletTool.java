@@ -26,8 +26,8 @@ import com.google.bitcoin.params.TestNet3Params;
 import com.google.bitcoin.protocols.payments.PaymentRequestException;
 import com.google.bitcoin.protocols.payments.PaymentSession;
 import com.google.bitcoin.store.*;
-import com.google.bitcoin.uri.XxxxxxxURI;
-import com.google.bitcoin.uri.XxxxxxxURIParseException;
+import com.google.bitcoin.uri.BitcoinURI;
+import com.google.bitcoin.uri.BitcoinURIParseException;
 import com.google.bitcoin.utils.BriefLogFormatter;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
@@ -59,7 +59,7 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 
 /**
- * A command line tool for manipulating wallets and working with Xxxxxxx.
+ * A command line tool for manipulating wallets and working with Bitcoin.
  */
 public class WalletTool {
     private static final Logger log = LoggerFactory.getLogger(WalletTool.class);
@@ -115,7 +115,7 @@ public class WalletTool {
             value = s;
         }
 
-        public boolean matchXxxxxxxs(BigInteger comparison) {
+        public boolean matchBitcoins(BigInteger comparison) {
             try {
                 BigInteger units = Utils.toNanoCoins(value);
                 switch (type) {
@@ -481,8 +481,8 @@ public class WalletTool {
                 if (location.startsWith("http")) {
                     future = PaymentSession.createFromUrl(location, verifyPki);
                 } else {
-                    XxxxxxxURI paymentRequestURI = new XxxxxxxURI(location);
-                    future = PaymentSession.createFromXxxxxxxUri(paymentRequestURI, verifyPki);
+                    BitcoinURI paymentRequestURI = new BitcoinURI(location);
+                    future = PaymentSession.createFromBitcoinUri(paymentRequestURI, verifyPki);
                 }
                 PaymentSession session = future.get();
                 if (session != null) {
@@ -494,7 +494,7 @@ public class WalletTool {
             } catch (PaymentRequestException e) {
                 System.err.println("Error creating payment session " + e.getMessage());
                 System.exit(1);
-            } catch (XxxxxxxURIParseException e) {
+            } catch (BitcoinURIParseException e) {
                 System.err.println("Invalid bitcoin uri: " + e.getMessage());
                 System.exit(1);
             } catch (InterruptedException e) {
@@ -634,7 +634,7 @@ public class WalletTool {
 
             case BALANCE:
                 // Check if the balance already meets the given condition.
-                if (condition.matchXxxxxxxs(wallet.getBalance(Wallet.BalanceType.ESTIMATED))) {
+                if (condition.matchBitcoins(wallet.getBalance(Wallet.BalanceType.ESTIMATED))) {
                     latch.countDown();
                     break;
                 }
@@ -644,7 +644,7 @@ public class WalletTool {
                         super.onChange();
                         saveWallet(walletFile);
                         BigInteger balance = wallet.getBalance(Wallet.BalanceType.ESTIMATED);
-                        if (condition.matchXxxxxxxs(balance)) {
+                        if (condition.matchBitcoins(balance)) {
                             System.out.println(Utils.bitcoinValueToFriendlyString(balance));
                             latch.countDown();
                         }
@@ -845,7 +845,7 @@ public class WalletTool {
                 Address address = new Address(wallet.getParams(), addr);
                 key = wallet.findKeyFromPubHash(address.getHash160());
             } catch (AddressFormatException e) {
-                System.err.println(addr + " does not parse as a Xxxxxxx address of the right network parameters.");
+                System.err.println(addr + " does not parse as a Bitcoin address of the right network parameters.");
                 return;
             }
         }

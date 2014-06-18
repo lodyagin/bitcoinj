@@ -45,7 +45,7 @@ import static com.google.common.base.Preconditions.*;
  * by {@link PaymentChannelClientState} and {@link PaymentChannelServerListener} implements the server-side network
  * protocol listening for TCP/IP connections and moving this class through each state. We say that the party who is
  * sending funds is the <i>client</i> or <i>initiating party</i>. The party that is receiving the funds is the
- * <i>server</i> or <i>receiving party</i>. Although the underlying Xxxxxxx protocol is capable of more complex
+ * <i>server</i> or <i>receiving party</i>. Although the underlying Bitcoin protocol is capable of more complex
  * relationships than that, this class implements only the simplest case.</p>
  *
  * <p>To protect clients from malicious servers, a channel has an expiry parameter. When this expiration is reached, the
@@ -200,7 +200,7 @@ public class PaymentChannelServerState {
         log.info("Signed refund transaction.");
         this.clientOutput = refundTx.getOutput(0);
         state = State.WAITING_FOR_MULTISIG_CONTRACT;
-        return sig.encodeToXxxxxxx();
+        return sig.encodeToBitcoin();
     }
 
     /**
@@ -287,7 +287,7 @@ public class PaymentChannelServerState {
         checkState(state == State.READY);
         checkNotNull(refundSize);
         checkNotNull(signatureBytes);
-        TransactionSignature signature = TransactionSignature.decodeFromXxxxxxx(signatureBytes, true);
+        TransactionSignature signature = TransactionSignature.decodeFromBitcoin(signatureBytes, true);
         // We allow snapping to zero for the payment amount because it's treated specially later, but not less than
         // the dust level because that would prevent the transaction from being relayed/mined.
         final boolean fullyUsedUp = refundSize.equals(BigInteger.ZERO);
@@ -341,7 +341,7 @@ public class PaymentChannelServerState {
     // Signs the first input of the transaction which must spend the multisig contract.
     private void signMultisigInput(Transaction tx, Transaction.SigHash hashType, boolean anyoneCanPay) {
         TransactionSignature signature = tx.calculateSignature(0, serverKey, multisigScript, hashType, anyoneCanPay);
-        byte[] mySig = signature.encodeToXxxxxxx();
+        byte[] mySig = signature.encodeToBitcoin();
         Script scriptSig = ScriptBuilder.createMultiSigInputScriptBytes(ImmutableList.of(bestValueSignature, mySig));
         tx.getInput(0).setScriptSig(scriptSig);
     }

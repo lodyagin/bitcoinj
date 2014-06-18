@@ -43,7 +43,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 /**
- * <p>A Peer handles the high level communication with a Xxxxxxx node, extending a {@link PeerSocketHandler} which
+ * <p>A Peer handles the high level communication with a Bitcoin node, extending a {@link PeerSocketHandler} which
  * handles low-level message (de)serialization.</p>
  *
  * <p>Note that timeouts are handled by the extended

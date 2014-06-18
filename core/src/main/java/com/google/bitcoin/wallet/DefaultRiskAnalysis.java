@@ -38,7 +38,7 @@ public class DefaultRiskAnalysis implements RiskAnalysis {
     /**
      * Any standard output smaller than this value (in satoshis) will be considered risky, as it's most likely be
      * rejected by the network. Currently it's 546 satoshis. This is different from {@link Transaction#MIN_NONDUST_OUTPUT}
-     * because of an upcoming fee change in Xxxxxxx Core 0.9.
+     * because of an upcoming fee change in Bitcoin Core 0.9.
      */
     public static final BigInteger MIN_ANALYSIS_NONDUST_OUTPUT = BigInteger.valueOf(546);
 

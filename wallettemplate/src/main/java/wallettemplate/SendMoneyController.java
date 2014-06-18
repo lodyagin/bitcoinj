@@ -8,7 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import wallettemplate.controls.XxxxxxxAddressValidator;
+import wallettemplate.controls.BitcoinAddressValidator;
 
 import static wallettemplate.utils.GuiUtils.crashAlert;
 import static wallettemplate.utils.GuiUtils.informationalAlert;
@@ -25,7 +25,7 @@ public class SendMoneyController {
 
     // Called by FXMLLoader
     public void initialize() {
-        new XxxxxxxAddressValidator(Main.params, address, sendBtn);
+        new BitcoinAddressValidator(Main.params, address, sendBtn);
     }
 
     public void cancel(ActionEvent event) {
