@@ -146,8 +146,9 @@ public abstract class PeerSocketHandler extends AbstractTimeoutHandler implement
                 Message message;
                 int preSerializePosition = buff.position();
                 try {
-                    message = serializer.deserialize(buff);
+                    message = serializer.deserialize(buff); 
                 } catch (BufferUnderflowException e) {
+                	//FIXME!  when delay execution here PeerGroup.connectToAnyPeer lost changes to connect to any peer
                     // If we went through the whole buffer without a full message, we need to use the largeReadBuffer
                     if (i == 0 && buff.limit() == buff.capacity()) {
                         // ...so reposition the buffer to 0 and read the next message header
