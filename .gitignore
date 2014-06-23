@@ -4,3 +4,8 @@ target
 .settings
 .idea
 *.iml
+core/.gitignore
+examples/.gitignore
+examples/forwarding-service.spvchain
+examples/forwarding-service.wallet
+tools/.gitignore
