@@ -23,6 +23,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import bz.cohors.bitcoin.pars.Hash;
 
 import javax.annotation.Nullable;
 import java.io.ByteArrayOutputStream;
@@ -189,7 +190,13 @@ public class Block extends Message {
         difficultyTarget = readUint32();
         nonce = readUint32();
 
-        hash = new Sha256Hash(Utils.reverseBytes(Utils.doubleDigest(bytes, offset, cursor)));
+        hash = new Sha256Hash(
+          Utils.reverseBytes(
+            Hash.instance().hash(
+              bytes, offset, cursor
+            )
+          )
+        );
 
         headerParsed = true;
         headerBytesValid = parseRetain;
@@ -503,7 +510,14 @@ public class Block extends Message {
         try {
             ByteArrayOutputStream bos = new UnsafeByteArrayOutputStream(HEADER_SIZE);
             writeHeader(bos);
-            return new Sha256Hash(Utils.reverseBytes(doubleDigest(bos.toByteArray())));
+            return new Sha256Hash(
+              Utils.reverseBytes(
+                Hash.instance().hash(
+                  bytes, offset, cursor
+                )
+              )
+            );
+
         } catch (IOException e) {
             throw new RuntimeException(e); // Cannot happen.
         }
