@@ -800,6 +800,7 @@ public abstract class AbstractBlockChain {
      * Throws an exception if the blocks difficulty is not correct.
      */
     private void checkDifficultyTransitions(StoredBlock storedPrev, Block nextBlock) throws BlockStoreException, VerificationException {
+    	/* FIXME
         checkState(lock.isHeldByCurrentThread());
         Block prev = storedPrev.getHeader();
         
@@ -867,9 +868,11 @@ public abstract class AbstractBlockChain {
         if (newDifficultyCompact != receivedDifficultyCompact)
             throw new VerificationException("Network provided difficulty bits do not match what was calculated: " +
                     newDifficultyCompact + " vs " + receivedDifficultyCompact);
+                    */
     }
 
     private void checkTestnetDifficulty(StoredBlock storedPrev, Block prev, Block next) throws VerificationException, BlockStoreException {
+    	/* TODO
         checkState(lock.isHeldByCurrentThread());
         // After 15th February 2012 the rules on the testnet change to avoid people running up the difficulty
         // and then leaving, making it too hard to mine a block. On non-difficulty transition points, easy
@@ -892,6 +895,7 @@ public abstract class AbstractBlockChain {
                     Long.toHexString(cursor.getHeader().getDifficultyTarget()) + " vs " +
                     Long.toHexString(next.getDifficultyTarget()));
         }
+        */
     }
 
     /**

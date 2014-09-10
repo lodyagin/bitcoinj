@@ -75,6 +75,7 @@ public class Transaction extends ChildMessage implements Serializable {
 
     // These are serialized in both bitcoin and java serialization.
     private long version;
+    private long time; // proof of stake only
     private ArrayList<TransactionInput> inputs;
     private ArrayList<TransactionOutput> outputs;
 
@@ -128,13 +129,14 @@ public class Transaction extends ChildMessage implements Serializable {
     public Transaction(NetworkParameters params) {
         super(params);
         version = 1;
+        time = Utils.currentTimeMillis() / 1000;
         inputs = new ArrayList<TransactionInput>();
         outputs = new ArrayList<TransactionOutput>();
         // We don't initialize appearsIn deliberately as it's only useful for transactions stored in the wallet.
         length = 8; // 8 for std fields
     }
 
-    public Transaction(NetworkParameters params, int version, Sha256Hash hash) {
+    /*public Transaction(NetworkParameters params, int version, Sha256Hash hash) {
         super(params);
         this.version = version & ((1L<<32) - 1); // this field is unsigned - remove any sign extension
         inputs = new ArrayList<TransactionInput>();
@@ -142,7 +144,7 @@ public class Transaction extends ChildMessage implements Serializable {
         this.hash = hash;
         // We don't initialize appearsIn deliberately as it's only useful for transactions stored in the wallet.
         length = 8; //8 for std fields
-    }
+    }*/
 
     /**
      * Creates a transaction from the given serialized bytes, eg, from a block or a tx network message.
@@ -185,6 +187,11 @@ public class Transaction extends ChildMessage implements Serializable {
         super(params, msg, 0, parent, parseLazy, parseRetain, length);
     }
 
+    public void setTime(long the_time)
+    {
+    	time = the_time;
+    }
+    
     /**
      * Returns the transaction hash as you see them in the block explorer.
      */
@@ -460,8 +467,10 @@ public class Transaction extends ChildMessage implements Serializable {
 
     protected static int calcLength(byte[] buf, int offset) {
         VarInt varint;
-        // jump past version (uint32)
+        // jump past version (uint32) 
         int cursor = offset + 4;
+        if (CoinDefinition.proofOfStake)
+        	cursor += 4; // & time (uint32)
 
         int i;
         long scriptLen;
@@ -503,6 +512,10 @@ public class Transaction extends ChildMessage implements Serializable {
 
         version = readUint32();
         optimalEncodingMessageSize = 4;
+        if (CoinDefinition.proofOfStake) {
+          time = readUint32();
+          optimalEncodingMessageSize += 4;
+        }
 
         // First come the inputs.
         long numInputs = readVarInt();
@@ -1056,6 +1069,8 @@ public class Transaction extends ChildMessage implements Serializable {
     @Override
     protected void bitcoinSerializeToStream(OutputStream stream) throws IOException {
         uint32ToByteStreamLE(version, stream);
+        if (CoinDefinition.proofOfStake)
+        	uint32ToByteStreamLE(time, stream);
         stream.write(new VarInt(inputs.size()).encode());
         for (TransactionInput in : inputs)
             in.bitcoinSerialize(stream);

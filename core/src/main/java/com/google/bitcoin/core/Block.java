@@ -512,9 +512,7 @@ public class Block extends Message {
             writeHeader(bos);
             return new Sha256Hash(
               Utils.reverseBytes(
-                Hash.instance().hash(
-                  bytes, offset, cursor
-                )
+                Hash.instance().hash(bos.toByteArray())
               )
             );
 
@@ -660,6 +658,7 @@ public class Block extends Message {
 
         BigInteger h = getHash().toBigInteger();
         if (h.compareTo(target) > 0) {
+        	System.out.print("hash\n" + h.toString(16) + " is greater than\n" + target.toString(16));
             // Proof of work check failed!
             if (throwException)
                 throw new VerificationException("Hash is higher than target: " + getHashAsString() + " vs "

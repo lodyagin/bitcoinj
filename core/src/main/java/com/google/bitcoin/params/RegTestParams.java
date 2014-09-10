@@ -30,7 +30,7 @@ public class RegTestParams extends TestNet2Params {
 
     public RegTestParams() {
         super();
-        interval = 10000;
+        //interval = 10000;
         proofOfWorkLimit = PROOF_OF_WORK_LIMIT;
         subsidyDecreaseBlockCount = 150;
         port = 18444;

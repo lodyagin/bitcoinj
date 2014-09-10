@@ -13,16 +13,21 @@ import static com.hashengineering.crypto.X11.x11Digest;
 
 public class Hash
 {
-	public interface Fun 
+	abstract public class Fun 
 	{
-	  public byte[] hash(
+	  abstract public byte[] hash(
 	    byte[] input, 
 	    int offset, 
 	    int length
 	  );
+	  
+	  public byte[] hash(byte[] input)
+	  {
+		  return hash(input, 0, input.length);
+	  }
 	};
 	
-	class X11 implements Fun
+	class X11 extends Fun
 	{
 	  public byte[] hash(
 	    byte[] input, 

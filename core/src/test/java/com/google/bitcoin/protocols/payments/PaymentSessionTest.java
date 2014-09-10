@@ -35,7 +35,7 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 public class PaymentSessionTest {
-    private static final NetworkParameters params = TestNet3Params.get();
+    private static final NetworkParameters params = MainNetParams.get();
     private static final String simplePaymentUrl = "http://a.simple.url.com/";
     private static final String paymentRequestMemo = "send coinz noa plz kthx";
     private static final String paymentMemo = "take ze coinz";

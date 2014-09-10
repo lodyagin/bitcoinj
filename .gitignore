@@ -1,6 +1,7 @@
 *#*
 *~*
 G*
+*.log
 *.orig
 *.rej
 target

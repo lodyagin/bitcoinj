@@ -17,6 +17,7 @@
 package com.google.bitcoin.params;
 
 import com.google.bitcoin.core.Block;
+import com.google.bitcoin.core.CoinDefinition;
 import com.google.bitcoin.core.NetworkParameters;
 
 import java.math.BigInteger;
@@ -37,10 +38,10 @@ public class UnitTestParams extends NetworkParameters {
         genesisBlock.setTime(System.currentTimeMillis() / 1000);
         genesisBlock.setDifficultyTarget(Block.EASIEST_DIFFICULTY_TARGET);
         genesisBlock.solve();
-        port = 2014130539;
-        interval = 10;
+        port = CoinDefinition.Port;
+        //interval = 10;
         dumpedPrivateKeyHeader = 239;
-        targetTimespan = 200000000;  // 6 years. Just a very big number.
+        //targetTimespan = 200000000;  // 6 years. Just a very big number.
         spendableCoinbaseDepth = 5;
         subsidyDecreaseBlockCount = 100;
         dnsSeeds = null;
