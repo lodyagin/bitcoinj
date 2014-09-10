@@ -33,7 +33,7 @@ public class MainNetParams extends NetworkParameters {
         targetTimespan = TARGET_TIMESPAN;
         proofOfWorkLimit = CoinDefinition.proofOfWorkLimit;
         dumpedPrivateKeyHeader = CoinDefinition.dumpedPrivateKeyHeader;
-        addressHeader = 0;
+        addressHeader = CoinDefinition.AddressHeader;
         p2shHeader = CoinDefinition.p2shHeader;
         acceptableAddressCodes = new int[] { addressHeader, p2shHeader };
         port = CoinDefinition.Port;
