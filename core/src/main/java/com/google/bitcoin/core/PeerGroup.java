@@ -69,7 +69,7 @@ import static com.google.common.base.Preconditions.checkState;
  * network IO, but starting and stopping the service should be fine.</p>
  */
 public class PeerGroup extends AbstractExecutionThreadService implements TransactionBroadcaster {
-    private static final int DEFAULT_CONNECTIONS = 4;
+    private static final int DEFAULT_CONNECTIONS = 2;
 
     private static final Logger log = LoggerFactory.getLogger(PeerGroup.class);
     protected final ReentrantLock lock = Threading.lock("peergroup");

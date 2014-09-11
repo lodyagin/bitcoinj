@@ -17,7 +17,7 @@
 package com.google.bitcoin.kits;
 
 import com.google.bitcoin.core.*;
-import com.google.bitcoin.net.discovery.DnsDiscovery;
+import com.google.bitcoin.net.discovery.SeedPeers;
 import com.google.bitcoin.store.BlockStoreException;
 import com.google.bitcoin.store.SPVBlockStore;
 import com.google.bitcoin.store.WalletProtobufSerializer;
@@ -227,7 +227,7 @@ public class WalletAppKit extends AbstractIdleService {
                 for (PeerAddress addr : peerAddresses) vPeerGroup.addAddress(addr);
                 peerAddresses = null;
             } else {
-                vPeerGroup.addPeerDiscovery(new DnsDiscovery(params));
+                vPeerGroup.addPeerDiscovery(new SeedPeers(params));
             }
             vChain.addWallet(vWallet);
             vPeerGroup.addWallet(vWallet);
