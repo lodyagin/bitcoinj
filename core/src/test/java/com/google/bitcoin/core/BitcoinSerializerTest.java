@@ -51,36 +51,6 @@ public class BitcoinSerializerTest {
             "22 5E 88 AC 80 FA E9 C7  00 00 00 00 19 76 A9 14" +
             "0E AB 5B EA 43 6A 04 84  CF AB 12 48 5E FD A0 B7" +
             "8B 4E CC 52 88 AC 00 00  00 00");
-/* TODO
-    @Test
-    public void testVersion() throws Exception {
-    	BitcoinSerializer bs = new BitcoinSerializer(NetworkParameters.prodNet(), false);
-        // the actual data from https://en.bitcoin.it/wiki/Protocol_specification#version
-        ByteArrayInputStream bais = new ByteArrayInputStream(Hex.decode("f9beb4d976657273696f6e0000000000550000009" +
-                "c7c00000100000000000000e615104d00000000010000000000000000000000000000000000ffff0a000001daf6010000" +
-                "000000000000000000000000000000ffff0a000002208ddd9d202c3ab457130055810100"));
-        VersionMessage vm = (VersionMessage)bs.deserialize(bais);
-        assertEquals(31900, vm.clientVersion);
-        assertEquals(1292899814L, vm.time);
-        assertEquals(98645L, vm.bestHeight);
-
-        // Standard version messsages don't use strings. Create one and round-trip here to check that works OK.
-        vm.subVer = "test string";
-        byte[] bits = vm.bitcoinSerialize();
-        VersionMessage vm2 = new VersionMessage(NetworkParameters.prodNet(), bits);
-        assertEquals(vm, vm2);
-    }
-
-
-    @Test
-    public void testVerack() throws Exception {
-        BitcoinSerializer bs = new BitcoinSerializer(NetworkParameters.prodNet(), false);
-        // the actual data from https://en.bitcoin.it/wiki/Protocol_specification#verack
-        ByteArrayInputStream bais = new ByteArrayInputStream(Hex.decode("f9beb4d976657261636b00000000000000000000"));
-        VersionAck va = (VersionAck)bs.deserialize(bais);
-        assertNotNull(va);
-    }
-*/
 
     @Test
     public void testAddr() throws Exception {
