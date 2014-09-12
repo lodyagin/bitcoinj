@@ -286,7 +286,7 @@ public class PeerGroup extends AbstractExecutionThreadService implements Transac
 
         int height = chain == null ? 0 : chain.getBestChainHeight();
         // We never request that the remote node wait for a bloom filter yet, as we have no wallets
-        this.versionMessage = new VersionMessage(params, height, true);
+        this.versionMessage = new VersionMessage(params, height);
 
         memoryPool = new MemoryPool();
 
@@ -435,7 +435,7 @@ public class PeerGroup extends AbstractExecutionThreadService implements Transac
     public void setUserAgent(String name, String version, @Nullable String comments) {
         //TODO Check that height is needed here (it wasnt, but it should be, no?)
         int height = chain == null ? 0 : chain.getBestChainHeight();
-        VersionMessage ver = new VersionMessage(params, height, false);
+        VersionMessage ver = new VersionMessage(params, height);
         updateVersionMessageRelayTxesBeforeFilter(ver);
         ver.appendToSubVer(name, version, comments);
         setVersionMessage(ver);
@@ -450,7 +450,7 @@ public class PeerGroup extends AbstractExecutionThreadService implements Transac
         try {
             boolean spvMode = chain != null && !chain.shouldVerifyTransactions();
             boolean willSendFilter = spvMode && peerFilterProviders.size() > 0;
-            ver.relayTxesBeforeFilter = !willSendFilter;
+            //ver.relayTxesBeforeFilter = !willSendFilter;
         } finally {
             lock.unlock();
         }

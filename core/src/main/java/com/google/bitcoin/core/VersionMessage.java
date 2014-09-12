@@ -68,13 +68,9 @@ public class VersionMessage extends Message {
      * How many blocks are in the chain, according to the other side.
      */
     public long bestHeight;
-    /**
-     * Whether or not to relay tx invs before a filter is received
-     */
-    public boolean relayTxesBeforeFilter;
 
     /** The version of this library release, as a string. */
-    public static final String BITCOINJ_VERSION = "0.11.3";
+    public static final String BITCOINJ_VERSION = "1.1d1"; // TODO
     /** The value that is prepended to the subVer field of this application. */
     public static final String LIBRARY_SUBVER = "/BitCoinJ:" + BITCOINJ_VERSION + "/";
 
@@ -85,13 +81,8 @@ public class VersionMessage extends Message {
     // It doesn't really make sense to ever lazily parse a version message or to retain the backing bytes.
     // If you're receiving this on the wire you need to check the protocol version and it will never need to be sent
     // back down the wire.
-    
-    /** Equivalent to VersionMessage(params, newBestHeight, true) */
-    public VersionMessage(NetworkParameters params, int newBestHeight) {
-        this(params, newBestHeight, true);
-    }
 
-    public VersionMessage(NetworkParameters params, int newBestHeight, boolean relayTxesBeforeFilter) {
+    public VersionMessage(NetworkParameters params, int newBestHeight) {
         super(params);
         clientVersion = NetworkParameters.PROTOCOL_VERSION;
         localServices = 0;
@@ -109,9 +100,8 @@ public class VersionMessage extends Message {
         }
         subVer = LIBRARY_SUBVER;
         bestHeight = newBestHeight;
-        this.relayTxesBeforeFilter = relayTxesBeforeFilter;
 
-        length = 85;
+        length = 84;
         if (protocolVersion > 31402)
             length += 8;
         length += VarInt.sizeOf(subVer.length()) + subVer.length();
@@ -139,25 +129,11 @@ public class VersionMessage extends Message {
         // We don't care about the localhost nonce. It's used to detect connecting back to yourself in cases where
         // there are NATs and proxies in the way. However we don't listen for inbound connections so it's irrelevant.
         readUint64();
-        try {
-            // Initialize default values for flags which may not be sent by old nodes
-            subVer = "";
-            bestHeight = 0;
-            relayTxesBeforeFilter = true;
-            if (!hasMoreBytes())
-                return;
-            //   string subVer  (currently "")
-            subVer = readStr();
-            if (!hasMoreBytes())
-                return;
-            //   int bestHeight (size of known block chain).
-            bestHeight = readUint32();
-            if (!hasMoreBytes())
-                return;
-            relayTxesBeforeFilter = readBytes(1)[0] != 0;
-        } finally {
-            length = cursor - offset;
-        }
+        //   string subVer  (currently "")
+        subVer = readStr();
+        //   int bestHeight (size of known block chain).
+        bestHeight = readUint32();
+        length = cursor - offset;
     }
 
     @Override
@@ -188,7 +164,6 @@ public class VersionMessage extends Message {
         buf.write(subVerBytes);
         // Size of known block chain.
         Utils.uint32ToByteStreamLE(bestHeight, buf);
-        buf.write(relayTxesBeforeFilter ? 1 : 0);
     }
 
     /**
@@ -209,8 +184,7 @@ public class VersionMessage extends Message {
                 other.time == time &&
                 other.subVer.equals(subVer) &&
                 other.myAddr.equals(myAddr) &&
-                other.theirAddr.equals(theirAddr) &&
-                other.relayTxesBeforeFilter == relayTxesBeforeFilter;
+                other.theirAddr.equals(theirAddr);
     }
 
     /**
@@ -232,7 +206,7 @@ public class VersionMessage extends Message {
     @Override
     public int hashCode() {
         return (int) bestHeight ^ clientVersion ^ (int) localServices ^ (int) time ^ subVer.hashCode() ^ myAddr.hashCode()
-                ^ theirAddr.hashCode() * (relayTxesBeforeFilter ? 1 : 2);
+                ^ theirAddr.hashCode();
     }
 
     public String toString() {
@@ -245,12 +219,11 @@ public class VersionMessage extends Message {
         sb.append("their addr:     ").append(theirAddr).append("\n");
         sb.append("sub version:    ").append(subVer).append("\n");
         sb.append("best height:    ").append(bestHeight).append("\n");
-        sb.append("delay tx relay: ").append(relayTxesBeforeFilter).append("\n");
         return sb.toString();
     }
 
     public VersionMessage duplicate() {
-        VersionMessage v = new VersionMessage(params, (int) bestHeight, relayTxesBeforeFilter);
+        VersionMessage v = new VersionMessage(params, (int) bestHeight);
         v.clientVersion = clientVersion;
         v.localServices = localServices;
         v.time = time;

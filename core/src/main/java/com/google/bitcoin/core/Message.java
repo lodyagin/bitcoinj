@@ -498,10 +498,6 @@ public abstract class Message implements Serializable {
             throw new ProtocolException(e);
         }
     }
-    
-    boolean hasMoreBytes() {
-        return cursor < bytes.length;
-    }
 
     /** Network parameters this message was created with. */
     public NetworkParameters getParams() {
