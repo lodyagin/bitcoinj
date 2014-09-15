@@ -29,8 +29,8 @@ import static com.google.common.base.Preconditions.checkState;
 public class MainNetParams extends NetworkParameters {
     public MainNetParams() {
         super();
-        interval = INTERVAL;
-        targetTimespan = TARGET_TIMESPAN;
+        //interval = INTERVAL;
+        //targetTimespan = TARGET_TIMESPAN;
         proofOfWorkLimit = CoinDefinition.proofOfWorkLimit;
         dumpedPrivateKeyHeader = CoinDefinition.dumpedPrivateKeyHeader;
         addressHeader = CoinDefinition.AddressHeader;

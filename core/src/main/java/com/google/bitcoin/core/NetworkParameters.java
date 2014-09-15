@@ -71,8 +71,8 @@ public abstract class NetworkParameters implements Serializable {
     protected int addressHeader;
     protected int p2shHeader;
     protected int dumpedPrivateKeyHeader;
-    protected int interval;
-    protected int targetTimespan;
+    //protected int interval;
+    //protected int targetTimespan;
     protected byte[] alertSigningKey;
 
     /**
@@ -121,9 +121,9 @@ public abstract class NetworkParameters implements Serializable {
         return genesisBlock;
     }
 
-    public static final int TARGET_TIMESPAN = CoinDefinition.TARGET_TIMESPAN;
-    public static final int TARGET_SPACING = CoinDefinition.TARGET_SPACING;
-    public static final int INTERVAL = TARGET_TIMESPAN / TARGET_SPACING;
+    //public static final int TARGET_TIMESPAN = CoinDefinition.TARGET_TIMESPAN;
+    //public static final int TARGET_SPACING = CoinDefinition.TARGET_SPACING;
+    //public static final int INTERVAL = TARGET_TIMESPAN / TARGET_SPACING;
     
     /**
      * Blocks with a timestamp after this should enforce BIP 16, aka "Pay to script hash". This BIP changed the
@@ -301,9 +301,9 @@ public abstract class NetworkParameters implements Serializable {
      * significantly different from this value, the network difficulty formula will produce a different value. Both
      * test and production Bitcoin networks use 2 weeks (1209600 seconds).
      */
-    public int getTargetTimespan() {
+    /*public int getTargetTimespan() {
         return targetTimespan;
-    }
+    }*/
 
     /**
      * The version codes that prefix addresses which are acceptable on this network. Although Satoshi intended these to
@@ -322,9 +322,9 @@ public abstract class NetworkParameters implements Serializable {
     }
 
     /** How many blocks pass between difficulty adjustment periods. Bitcoin standardises this to be 2015. */
-    public int getInterval() {
+    /*public int getInterval() {
         return interval;
-    }
+    }*/
 
     /** What the easiest allowable proof of work should be. */
     public BigInteger getProofOfWorkLimit() {
