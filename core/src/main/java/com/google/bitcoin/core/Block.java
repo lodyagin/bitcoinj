@@ -782,7 +782,7 @@ public class Block extends Message {
         // Firstly we need to ensure this block does in fact represent real work done. If the difficulty is high
         // enough, it's probably been done by the network.
         maybeParseHeader();
-        checkProofOfWork(true);
+        // FIXME!!! checkProofOfWork(true);
         checkTimestamp();
     }
 
