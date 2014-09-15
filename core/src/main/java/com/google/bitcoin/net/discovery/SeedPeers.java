@@ -90,7 +90,8 @@ public class SeedPeers implements PeerDiscovery {
     public static int[] seedAddrs =
     {
     	//0x27fce2bc, 0x5580e2bc
-    	0x0100007f
+    	//0x0100007f
+    	0x1a5713c1 // mercury
     };
     
     public void shutdown() {
