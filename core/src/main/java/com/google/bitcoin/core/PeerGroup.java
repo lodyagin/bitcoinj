@@ -867,6 +867,7 @@ public class PeerGroup extends AbstractExecutionThreadService implements Transac
         pendingPeers.add(peer);
 
         try {
+        	log.debug("Try connect to " + address);
             channels.openConnection(address.toSocketAddress(), peer);
         } catch (Exception e) {
             log.warn("Failed to connect to " + address + ": " + e.getMessage());
