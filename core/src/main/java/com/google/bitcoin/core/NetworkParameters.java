@@ -102,17 +102,17 @@ public abstract class NetworkParameters implements Serializable {
         if (CoinDefinition.proofOfStake)
         	t.setTime(CoinDefinition.genesisBlockTime);
         try {
-            // A script containing the difficulty bits and the following message:
+            // A script containing 486604799 and the following message:
             //
-            //   "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"
+            //   "Here lies the volume thou boldly hast sought;Touch it,and take it,'twill dearly be bought"
             byte[] bytes = Hex.decode
-            		("00012a1d4672692c2030312041756720323031342031333a33363a323020474d54");
+            		("04ffff001d01044c5948657265206c6965732074686520766f6c756d652074686f7520626f6c646c79206861737420736f756768743b546f7563682069742c616e642074616b652069742c277477696c6c20646561726c7920626520626f75676874");
             t.addInput(new TransactionInput(n, t, bytes));
             ByteArrayOutputStream scriptPubKeyBytes = new ByteArrayOutputStream();
-            //Script.writeBytes(scriptPubKeyBytes, Hex.decode("00"));
+            Script.writeBytes(scriptPubKeyBytes, Hex.decode("0487e11b7e3b8803bef76182af8faa8566191aa37e301e0f8bc01ca668a265c5a11c2d95a689c8432e6aae6e5d0be182c9db9c2fa6494e49b0e464c1b87da7f9be"));
                     
-            //scriptPubKeyBytes.write(ScriptOpCodes.OP_CHECKSIG);
-            t.addOutput(new TransactionOutput(n, t, Utils.toNanoCoins(0, 0), scriptPubKeyBytes.toByteArray()));
+            scriptPubKeyBytes.write(ScriptOpCodes.OP_CHECKSIG);
+            t.addOutput(new TransactionOutput(n, t, Utils.toNanoCoins(1500, 0), scriptPubKeyBytes.toByteArray()));
         } catch (Exception e) {
             // Cannot happen.
             throw new RuntimeException(e);

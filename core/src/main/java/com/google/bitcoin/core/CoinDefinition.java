@@ -28,7 +28,7 @@ public class CoinDefinition {
     public static final CoinPrecision coinPrecision = CoinPrecision.Coins;
 
     
-    public static final boolean proofOfStake = true;
+    public static final boolean proofOfStake = false;
 
     public static final String BLOCKEXPLORER_BASE_URL_PROD = "http://explorer.xxxxxxx.io/";    //blockr.io
     public static final String BLOCKEXPLORER_ADDRESS_PATH = "address/";             //blockr.io path
@@ -131,7 +131,7 @@ public class CoinDefinition {
 
     //public static int subsidyDecreaseBlockCount = 4730400;     //main.cpp GetBlockValue(height, fee)
 
-    public static BigInteger proofOfWorkLimit = Utils.decodeCompactBits(0x1e0fffffL);  //main.cpp bnProofOfWorkLimit (~uint256(0) >> 20); // digitalcoin: starting difficulty is 1 / 2^12
+    public static BigInteger proofOfWorkLimit = Utils.decodeCompactBits(0x1f00f666L);  //main.cpp bnProofOfWorkLimit (~uint256(0) >> 20); // digitalcoin: starting difficulty is 1 / 2^12
 
     static public String[] testnetDnsSeeds = new String[] {
     };
