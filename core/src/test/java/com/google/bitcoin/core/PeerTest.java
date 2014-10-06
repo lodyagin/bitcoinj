@@ -89,7 +89,7 @@ public class PeerTest extends TestWithNetworkConnections {
     }
 
     private void connect() throws Exception {
-        connectWithVersion(70001);
+        connectWithVersion(910000);
     }
 
     private void connectWithVersion(int version) throws Exception {
@@ -269,7 +269,7 @@ public class PeerTest extends TestWithNetworkConnections {
         Peer peer2 = new Peer(unitTestParams, ver, new PeerAddress(address), blockChain, memoryPool);
         peer2.addWallet(wallet);
         VersionMessage peerVersion = new VersionMessage(unitTestParams, OTHER_PEER_CHAIN_HEIGHT);
-        peerVersion.clientVersion = 70001;
+        peerVersion.clientVersion = 910000;
         peerVersion.localServices = VersionMessage.NODE_NETWORK;
 
         connect();
@@ -523,7 +523,7 @@ public class PeerTest extends TestWithNetworkConnections {
 
     public void recursiveDownload(boolean useNotFound) throws Exception {
         // Using ping or notfound?
-        connectWithVersion(useNotFound ? 70001 : 60001);
+        connectWithVersion(useNotFound ? 910000 : 60001);
         // Check that we can download all dependencies of an unconfirmed relevant transaction from the mempool.
         ECKey to = new ECKey();
 
@@ -648,7 +648,7 @@ public class PeerTest extends TestWithNetworkConnections {
     }
 
     public void timeLockedTransaction(boolean useNotFound) throws Exception {
-        connectWithVersion(useNotFound ? 70001 : 60001);
+        connectWithVersion(useNotFound ? 910000 : 60001);
         // Test that if we receive a relevant transaction that has a lock time, it doesn't result in a notification
         // until we explicitly opt in to seeing those.
         ECKey key = new ECKey();
@@ -723,7 +723,7 @@ public class PeerTest extends TestWithNetworkConnections {
 
     private void checkTimeLockedDependency(boolean shouldAccept, boolean useNotFound) throws Exception {
         // Initial setup.
-        connectWithVersion(useNotFound ? 70001 : 60001);
+        connectWithVersion(useNotFound ? 910000 : 60001);
         ECKey key = new ECKey();
         Wallet wallet = new Wallet(unitTestParams);
         wallet.addKey(key);
