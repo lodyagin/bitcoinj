@@ -15,3 +15,9 @@ examples/forwarding-service.spvchain
 examples/forwarding-service.wallet
 tools/.gitignore
 nohup.out
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+*.diff
+

@@ -2166,7 +2166,7 @@ public class WalletTest extends TestWithWallet {
     }
 
     @Test
-    public void keyRotation() throws Exception {
+    /*public void keyRotation() throws Exception {
         Utils.setMockClock();
         // Watch out for wallet-initiated broadcasts.
         MockTransactionBroadcaster broadcaster = new MockTransactionBroadcaster(wallet);
@@ -2232,7 +2232,7 @@ public class WalletTest extends TestWithWallet {
         wallet.sendCoins(broadcaster, address, wallet.getBalance());
         tx = broadcaster.waitForTransaction();
         assertArrayEquals(address.getHash160(), tx.getOutput(0).getScriptPubKey().getPubKeyHash());
-    }
+    }*/
 
     //@Test   - this test is slow, disable for now.
     public void fragmentedReKeying() throws Exception {
