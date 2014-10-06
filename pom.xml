@@ -62,11 +62,12 @@
   </build>
 
   <dependencies>
+<!--
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>1.7.5</version>
-      </dependency> 
+      </dependency> -->
       <!-- bitcoinj consumers are expected to provide their own SLF4J adapters
     such as logback, slf4j-log4j12, slf4j-jcl and so on
     see http://www.slf4j.org/faq.html -->
@@ -77,14 +78,14 @@
         <scope>runtime</scope>
         <optional>true</optional>
       </dependency>
-
+-->
       <dependency>
   <groupId>ch.qos.logback</groupId>
   <artifactId>logback-classic</artifactId>
   <version>1.0.13</version>
          
       </dependency>
--->  </dependencies>
+  </dependencies>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
