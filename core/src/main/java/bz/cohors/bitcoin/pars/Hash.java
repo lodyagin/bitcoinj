@@ -10,6 +10,7 @@
 package bz.cohors.bitcoin.pars;
 
 import static com.hashengineering.crypto.X11.x11Digest;
+import static bz.cohors.bitcoin.hash.Brittcoin.brittcoinDigest;
 
 public class Hash
 {
@@ -19,13 +20,13 @@ public class Hash
 	    byte[] input, 
 	    int offset, 
 	    int length
-	  );
+	  ); 
 	  
 	  public byte[] hash(byte[] input)
 	  {
 		  return hash(input, 0, input.length);
 	  }
-	};
+	}
 	
 	class X11 extends Fun
 	{
@@ -37,14 +38,31 @@ public class Hash
 	  {
 	    return x11Digest(input, offset, length);
 	  }
-	};
+	}
 	
-  private Hash() {} // a singleton
+	class Brittcoin extends Fun
+	{
+      public byte[] hash(
+        byte[] input, 
+        int offset, 
+		int length
+      )
+      {
+        byte [] buf = new byte[length];
+        for(int i = 0; i < length; ++i)
+        {
+          buf[i] = input[offset + i];
+        }
+        return brittcoinDigest(buf);
+      }
+	}
+	
+    private Hash() {} // a singleton
 	
 	private static class Holder
 	{
-		private static final Hash the_hash = new Hash();
-	  private static final Fun the_fun = the_hash.new X11();
+	  private static final Hash the_hash = new Hash();
+	  private static final Fun the_fun = the_hash.new Brittcoin();
 	}
 	
 	public static Fun instance()
