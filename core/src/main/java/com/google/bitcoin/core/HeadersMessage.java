@@ -81,7 +81,7 @@ public class HeadersMessage extends Message {
         blockHeaders = new ArrayList<Block>();
 
         for (int i = 0; i < numHeaders; ++i) {
-        	if (false) {  
+        	if (!CoinDefinition.blockVersion6) {  
 	            // Read 80 bytes of the header and one more byte for the transaction list, which is always a 00 because the
 	            // transaction list is empty.
 	            byte[] blockHeader = readBytes(81);
