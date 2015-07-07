@@ -9,8 +9,13 @@
 
 package bz.cohors.bitcoin.pars;
 
-import static com.hashengineering.crypto.X11.x11Digest;
+//import static com.hashengineering.crypto.X11.x11Digest;
 import static bz.cohors.bitcoin.hash.Brittcoin.brittcoinDigest;
+
+import java.security.GeneralSecurityException;
+
+import com.lambdaworks.crypto.SCrypt;
+
 
 public class Hash
 {
@@ -28,7 +33,7 @@ public class Hash
 	  }
 	}
 	
-	class X11 extends Fun
+	/*class X11 extends Fun
 	{
 	  public byte[] hash(
 	    byte[] input, 
@@ -38,7 +43,7 @@ public class Hash
 	  {
 	    return x11Digest(input, offset, length);
 	  }
-	}
+	}*/
 	
 	class Brittcoin extends Fun
 	{
@@ -57,7 +62,25 @@ public class Hash
       }
 	}
 	
-    private Hash() {} // a singleton
+	class Litecoin extends Fun
+	{
+		@Override
+    public byte[] hash(byte[] input, int offset, int length) {
+      byte [] buf = new byte[length];
+      for(int i = 0; i < length; ++i)
+      {
+        buf[i] = input[offset + i];
+      }
+  		try {
+  			return SCrypt.scrypt(input, input, 1024, 8, 1, 32);
+  		} catch (GeneralSecurityException e) {
+  			return null;
+  		}
+			
+    }
+	}
+	
+  private Hash() {} // a singleton
 	
 	private static class Holder
 	{
