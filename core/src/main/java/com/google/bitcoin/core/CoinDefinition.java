@@ -36,8 +36,8 @@ public class CoinDefinition {
     public static final String BLOCKEXPLORER_BLOCK_PATH = "block/";                 //blockr.io path
     public static final String BLOCKEXPLORER_BASE_URL_TEST = BLOCKEXPLORER_BASE_URL_PROD;
 
-    public static final String DONATION_ADDRESS = "FHxPW2J7JQygimYcpP5j43o8rMHx3qjHHo"; 
-    public static final String DONATION_ADDRESS_TESTNET = "";  
+    //public static final String DONATION_ADDRESS = "FHxPW2J7JQygimYcpP5j43o8rMHx3qjHHo"; 
+    //public static final String DONATION_ADDRESS_TESTNET = "";  
 
     public static boolean checkpointFileSupport = true;
 
@@ -57,13 +57,13 @@ public class CoinDefinition {
     }*/
 
     //public static int spendableCoinbaseDepth = 100; //main.h: static const int COINBASE_MATURITY
-    public static final BigInteger MAX_MONEY = BigInteger.valueOf(27464398500L).multiply(Utils.COIN);                 //main.h:  MAX_MONEY
+    public static final BigInteger MAX_MONEY = BigInteger.valueOf(10000000L).multiply(Utils.COIN);                 //main.h:  MAX_MONEY
 
     public static final BigInteger DEFAULT_MIN_TX_FEE = BigInteger.valueOf(1000);   // MIN_TX_FEE
     //public static final BigInteger DUST_LIMIT = BigInteger.valueOf(1000); //main.h CTransaction::GetMinFee        0.01 coins
 
-    public static final int PROTOCOL_VERSION = 910000;          //version.h PROTOCOL_VERSION
-    public static final int MIN_PROTOCOL_VERSION = 910000;        //version.h MIN_PROTO_VERSION
+    public static final int PROTOCOL_VERSION = 70003;          //version.h PROTOCOL_VERSION
+    public static final int MIN_PROTOCOL_VERSION = 70003;        //version.h MIN_PROTO_VERSION
     public static final int BIP0031_VERSION = 60000;
 
     public static final int BLOCK_CURRENTVERSION = 2;   //CBlock::CURRENT_VERSION
@@ -72,25 +72,25 @@ public class CoinDefinition {
 
     //public static final boolean supportsBloomFiltering = false; //Requires PROTOCOL_VERSION 70000 in the client
 
-    public static final int Port    = 13694;//protocol.h GetDefaultPort(testnet=false)
-    public static final int TestPort= 13697;//protocol.h GetDefaultPort(testnet=true)
+    public static final int Port    = 13674;//protocol.h GetDefaultPort(testnet=false)
+    public static final int TestPort= 13677;//protocol.h GetDefaultPort(testnet=true)
 
     //
     //  Production
     //
-    public static final int AddressHeader = 76;             //base58.h CBitcoinAddress::PUBKEY_ADDRESS
+    public static final int AddressHeader = 28;             //base58.h CBitcoinAddress::PUBKEY_ADDRESS
     public static final int p2shHeader = 5;             //base58.h CBitcoinAddress::SCRIPT_ADDRESS
     //public static final boolean allowBitcoinPrivateKey = false; //for backward compatibility with previous version of digitalcoin
     public static final int dumpedPrivateKeyHeader = 128;   //common to all coins
     //public static final long oldPacketMagic = 0xfbc0b6db;      //0xfb, 0xc0, 0xb6, 0xdb
-    public static final long PacketMagic = 0xf1b79a40L;
+    public static final long PacketMagic = 0xf1b3b6d7L;
 
     //Genesis Block Information from main.cpp: LoadBlockIndex
-    static public long genesisBlockDifficultyTarget = (0x1f00f666L);         //main.cpp: LoadBlockIndex
-    static public long genesisBlockTime = 1400346858L;                       //main.cpp: LoadBlockIndex
-    static public long genesisBlockNonce = (6257);                         //main.cpp: LoadBlockIndex
-    static public String genesisHash = "0000da586f4e2e368f344d34b398c1aca472326bd4f515cf4545fc498ee9fad2"; // NB: PoW hash here
-    static public String genesisMerkleRoot = "acd0d03247a02c51a72eb478bc38d889bab3fdf9635dd702cdc0da70f181d674";
+    static public long genesisBlockDifficultyTarget = (0x1e01f998L);         //main.cpp: LoadBlockIndex
+    static public long genesisBlockTime = 1396281265L;                       //main.cpp: LoadBlockIndex
+    static public long genesisBlockNonce = (4172846L);                         //main.cpp: LoadBlockIndex
+    static public String genesisHash = "0000018b0b21f7829f618e4e679d5ae7f33541189e402c04a91e050970161924"; // NB: PoW hash here
+    static public String genesisMerkleRoot = "c900d294567c4363a0d8481f24e635df784e5b480e7b7eb97f0841628fcbe93a";
     static public int genesisBlockValue = 0;                                                              //main.cpp: LoadBlockIndex
     //taken from the raw data of the block explorer
     //static public String genesisTxInBytes = "04ffff001d01044c5957697265642030392f4a616e2f3230313420546865204772616e64204578706572696d656e7420476f6573204c6976653a204f76657273746f636b2e636f6d204973204e6f7720416363657074696e6720426974636f696e73";   //"limecoin se convertira en una de las monedas mas segura del mercado, checa nuestros avances"
@@ -106,14 +106,14 @@ public class CoinDefinition {
     //
     // TestNet
     //
-    public static final boolean supportsTestNet = false;
+    public static final boolean supportsTestNet = true;
     public static final int testnetAddressHeader = 75;             //base58.h CBitcoinAddress::PUBKEY_ADDRESS_TEST
     public static final int testnetp2shHeader = 196;             //base58.h CBitcoinAddress::SCRIPT_ADDRESS_TEST
-    public static final long testnetPacketMagic = 0x62726974;      //
-    public static final String testnetGenesisHash = "e5f382145ce5c908febfebc08eb22fd60a49bfba656432bd4e271356c95a8426";
-    static public long testnetGenesisBlockDifficultyTarget = (0x1f2468aaL);         //main.cpp: LoadBlockIndex
-    static public long testnetGenesisBlockTime = 1404708307L;                       //main.cpp: LoadBlockIndex
-    static public long testnetGenesisBlockNonce = (663L);                         //main.cpp: LoadBlockIndex
+    public static final long testnetPacketMagic = 0x01130607;      //
+    public static final String testnetGenesisHash = "000079a939cdc196fb930f732fdbaef86c19d88486d7874464ef690419af40d0";
+    static public long testnetGenesisBlockDifficultyTarget = (0x1f00e3d6L);         //main.cpp: LoadBlockIndex
+    static public long testnetGenesisBlockTime = 1403787088L;                       //main.cpp: LoadBlockIndex
+    static public long testnetGenesisBlockNonce = (41360L);                         //main.cpp: LoadBlockIndex
 
 
 
@@ -131,7 +131,7 @@ public class CoinDefinition {
 
     //public static int subsidyDecreaseBlockCount = 4730400;     //main.cpp GetBlockValue(height, fee)
 
-    public static BigInteger proofOfWorkLimit = Utils.decodeCompactBits(0x1f00f666L);  //main.cpp bnProofOfWorkLimit (~uint256(0) >> 20); // digitalcoin: starting difficulty is 1 / 2^12
+    public static BigInteger proofOfWorkLimit = Utils.decodeCompactBits(0x1f000000L);  //main.cpp bnProofOfWorkLimit (~uint256(0) >> 20); // digitalcoin: starting difficulty is 1 / 2^12
 
     static public String[] testnetDnsSeeds = new String[] {
     };
@@ -153,7 +153,7 @@ public class CoinDefinition {
     }
 
     //Unit Test Information
-    public static final String UNITTEST_ADDRESS = "FEkuDDu6KcedqWPBsR2EzjTw3ZmckxbiQs";
+    public static final String UNITTEST_ADDRESS = "XCQFRroTc1mU15UdRhRLqaJFP1GVwRR26Z";
     //public static final String UNITTEST_ADDRESS_PRIVATE_KEY = "XDtvHyDHk4S3WJvwjxSANCpZiLLkKzoDnjrcRhca2iLQRtGEz1JZ";
 
 }
