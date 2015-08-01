@@ -353,12 +353,12 @@ public class Utils {
     
     /**
      * <p>
-     * Returns the given value as a plain string denominated in ZYZ.   
+     * Returns the given value as a plain string denominated in CPC.   
      * The result is unformatted with no trailing zeroes.
-     * For instance, an input value of BigInteger.valueOf(150000) nanocoin gives an output string of "0.0015" ZYZ
+     * For instance, an input value of BigInteger.valueOf(150000) nanocoin gives an output string of "0.0015" CPC
      * </p>
      * 
-     * @param value The value in nanocoins to convert to a string (denominated in ZYZ)
+     * @param value The value in nanocoins to convert to a string (denominated in CPC)
      * @throws IllegalArgumentException
      *            If the input value is null
      */
@@ -367,8 +367,8 @@ public class Utils {
             throw new IllegalArgumentException("Value cannot be null");
         }
                 
-        BigDecimal valueInZYZ = new BigDecimal(value).divide(new BigDecimal(Utils.COIN));
-        return valueInZYZ.toPlainString();
+        BigDecimal valueInCPC = new BigDecimal(value).divide(new BigDecimal(Utils.COIN));
+        return valueInCPC.toPlainString();
     }
 
     /**

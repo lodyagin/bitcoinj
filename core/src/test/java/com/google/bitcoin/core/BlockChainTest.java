@@ -349,7 +349,7 @@ public class BlockChainTest {
         assertEquals(wallet.getBalance(BalanceType.ESTIMATED), Utils.toNanoCoins(50, 0));
         assertTrue(coinbaseTransaction.isMature());
 
-        // Create a spend with the coinbase ZYZ to the address in the second wallet - this should now succeed.
+        // Create a spend with the coinbase CPC to the address in the second wallet - this should now succeed.
         Transaction coinbaseSend2 = wallet.createSend(addressToSendTo, Utils.toNanoCoins(49, 0));
         assertNotNull(coinbaseSend2);
 

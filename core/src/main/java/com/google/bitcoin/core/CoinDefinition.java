@@ -14,8 +14,8 @@ import java.util.Vector;
 public class CoinDefinition {
 
 
-    public static final String coinName = "Xxxxxxx";
-    public static final String coinTicker = "ZYZ";
+    public static final String coinName = "Compcoin";
+    public static final String coinTicker = "CPC";
     public static final String coinURIScheme = "bitcoin";
     //public static final String cryptsyMarketId = "155";
     //public static final String cryptsyMarketCurrency = "BTC";
@@ -30,7 +30,7 @@ public class CoinDefinition {
     
     public static final boolean proofOfStake = false;
 
-    public static final String BLOCKEXPLORER_BASE_URL_PROD = "http://explorer.xxxxxxx.io/";    //blockr.io
+    public static final String BLOCKEXPLORER_BASE_URL_PROD = "http://explorer.compcoin.io/";    //blockr.io
     public static final String BLOCKEXPLORER_ADDRESS_PATH = "address/";             //blockr.io path
     public static final String BLOCKEXPLORER_TRANSACTION_PATH = "tx/";              //blockr.io path
     public static final String BLOCKEXPLORER_BLOCK_PATH = "block/";                 //blockr.io path
@@ -141,11 +141,11 @@ public class CoinDefinition {
 	public static boolean blockVersion6 = false;
 
     /** The string returned by getId() for the main, production network where people trade things. */
-    public static final String ID_MAINNET = "org.xxxxxxx.production";
+    public static final String ID_MAINNET = "org.compcoin.production";
     /** The string returned by getId() for the testnet. */
-    public static final String ID_TESTNET = "org.xxxxxxx.test";
+    public static final String ID_TESTNET = "org.compcoin.test";
     /** Unit test network. */
-    public static final String ID_UNITTESTNET = "com.google.xxxxxxx.unittest";
+    public static final String ID_UNITTESTNET = "com.google.compcoin.unittest";
 
     //checkpoints.cpp Checkpoints::mapCheckpoints
     public static void initCheckpoints(Map<Integer, Sha256Hash> checkpoints)

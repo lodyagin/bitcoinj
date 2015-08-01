@@ -733,7 +733,7 @@ public class WalletTest extends TestWithWallet {
             }
         });
 
-        // Receive 1 ZYZ.
+        // Receive 1 CPC.
         BigInteger nanos = Utils.toNanoCoins(1, 0);
         sendMoneyToWallet(nanos, AbstractBlockChain.NewBlockType.BEST_CHAIN);
         Transaction received = wallet.getTransactions(false).iterator().next();
@@ -867,7 +867,7 @@ public class WalletTest extends TestWithWallet {
         assertEquals(t2, txn[0]);
         assertEquals(nanos, bigints[0]);
         assertEquals(halfNanos, bigints[1]);
-        // Our balance is now 0.50 ZYZ
+        // Our balance is now 0.50 CPC
         assertEquals(halfNanos, wallet.getBalance(Wallet.BalanceType.ESTIMATED));
     }
 
@@ -1009,7 +1009,7 @@ public class WalletTest extends TestWithWallet {
         // We should have a zero available balance before the next block.
         assertEquals(BigInteger.ZERO, wallet.getBalance());
         sendMoneyToWallet(outbound1, AbstractBlockChain.NewBlockType.BEST_CHAIN);
-        // We should have a balance of 1 ZYZ after the block is received.
+        // We should have a balance of 1 CPC after the block is received.
         assertEquals(coin1, wallet.getBalance());
     }
 

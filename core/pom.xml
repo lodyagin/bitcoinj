@@ -28,7 +28,7 @@
     <artifactId>bitcoinj</artifactId>
 
     <name>bitcoinj</name>
-    <description>A Java Xxxxxxx library</description>
+    <description>A Java Compcoin library</description>
 
     <packaging>jar</packaging>
 

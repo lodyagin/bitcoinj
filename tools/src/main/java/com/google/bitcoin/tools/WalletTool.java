@@ -495,7 +495,7 @@ public class WalletTool {
                 System.err.println("Error creating payment session " + e.getMessage());
                 System.exit(1);
             } catch (BitcoinURIParseException e) {
-                System.err.println("Invalid xxxxxxx uri: " + e.getMessage());
+                System.err.println("Invalid compcoin uri: " + e.getMessage());
                 System.exit(1);
             } catch (InterruptedException e) {
                 // Ignore.
@@ -532,7 +532,7 @@ public class WalletTool {
     private static void send(PaymentSession session) {
         try {
             System.out.println("Payment Request");
-            System.out.println("Amount: " + session.getValue().doubleValue() / 100000 + "mZYZ");
+            System.out.println("Amount: " + session.getValue().doubleValue() / 100000 + "mCPC");
             System.out.println("Date: " + session.getDate());
             System.out.println("Memo: " + session.getMemo());
             if (session.pkiVerificationData != null) {
@@ -845,7 +845,7 @@ public class WalletTool {
                 Address address = new Address(wallet.getParams(), addr);
                 key = wallet.findKeyFromPubHash(address.getHash160());
             } catch (AddressFormatException e) {
-                System.err.println(addr + " does not parse as a Xxxxxxx address of the right network parameters.");
+                System.err.println(addr + " does not parse as a Compcoin address of the right network parameters.");
                 return;
             }
         }
