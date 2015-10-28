@@ -65,7 +65,7 @@ public abstract class NetworkParameters implements Serializable {
     // TODO: Seed nodes should be here as well.
 
     protected Block genesisBlock;
-    protected BigInteger proofOfWorkLimit;
+    //protected BigInteger proofOfWorkLimit;
     protected int port;
     protected long packetMagic;
     protected int addressHeader;
@@ -91,8 +91,11 @@ public abstract class NetworkParameters implements Serializable {
     protected String[] dnsSeeds;
     protected Map<Integer, Sha256Hash> checkpoints = new HashMap<Integer, Sha256Hash>();
 
-    protected NetworkParameters() {
+    protected int genesisVersion;
+    
+    protected NetworkParameters(int genVersion) {
         alertSigningKey = ALERT_KEY;
+        genesisVersion = genVersion;
         genesisBlock = createGenesis(this);
     }
 
@@ -102,17 +105,18 @@ public abstract class NetworkParameters implements Serializable {
         if (CoinDefinition.proofOfStake)
         	t.setTime(CoinDefinition.genesisBlockTime);
         try {
-            // A script containing 486604799 and the following message:
+            // A script containing 486604799 (all Kogorta coins has the same) 
+        	  // and the following message:
             //
-            //   "Here lies the volume thou boldly hast sought;Touch it,and take it,'twill dearly be bought"
+            //   "Noon gleams on the Lake, Noon glows on the Fell, Wake thee, O wake, White Maid of Avenel!"
             byte[] bytes = Hex.decode
-            		("04ffff001d01044c5948657265206c6965732074686520766f6c756d652074686f7520626f6c646c79206861737420736f756768743b546f7563682069742c616e642074616b652069742c277477696c6c20646561726c7920626520626f75676874");
+            		("04ffff001d01044c59" + "4e6f6f6e20676c65616d73206f6e20746865204c616b652c204e6f6f6e20676c6f7773206f6e207468652046656c6c2c2057616b6520746865652c204f2077616b652c205768697465204d616964206f66204176656e656c21");
             t.addInput(new TransactionInput(n, t, bytes));
             ByteArrayOutputStream scriptPubKeyBytes = new ByteArrayOutputStream();
             Script.writeBytes(scriptPubKeyBytes, Hex.decode("0487e11b7e3b8803bef76182af8faa8566191aa37e301e0f8bc01ca668a265c5a11c2d95a689c8432e6aae6e5d0be182c9db9c2fa6494e49b0e464c1b87da7f9be"));
                     
             scriptPubKeyBytes.write(ScriptOpCodes.OP_CHECKSIG);
-            t.addOutput(new TransactionOutput(n, t, Utils.toNanoCoins(1500, 0), scriptPubKeyBytes.toByteArray()));
+            t.addOutput(new TransactionOutput(n, t, CoinDefinition.genesisBlockValue, scriptPubKeyBytes.toByteArray()));
         } catch (Exception e) {
             // Cannot happen.
             throw new RuntimeException(e);
@@ -327,9 +331,9 @@ public abstract class NetworkParameters implements Serializable {
     }*/
 
     /** What the easiest allowable proof of work should be. */
-    public BigInteger getProofOfWorkLimit() {
+    /*public BigInteger getProofOfWorkLimit() {
         return proofOfWorkLimit;
-    }
+    }*/
 
     /**
      * The key used to sign {@link com.google.bitcoin.core.AlertMessage}s. You can use {@link com.google.bitcoin.core.ECKey#verify(byte[], byte[], byte[])} to verify

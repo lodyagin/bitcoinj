@@ -174,7 +174,6 @@ public class BlockChainTest {
         assertEquals(chain.getChainHead().getHeader(), b3.cloneAsHeader());
     }
 
-    /* FIXME for DigiShield
     @Test
     public void difficultyTransitions() throws Exception {
         // Add a bunch of blocks in a loop until we reach a difficulty transition point. The unit test params have an
@@ -201,7 +200,7 @@ public class BlockChainTest {
         b.solve();
         assertTrue(chain.add(b));
         // Successfully traversed a difficulty transition period.
-    } */
+    }
 
     @Test
     public void badDifficulty() throws Exception {

@@ -103,7 +103,7 @@ public class Block extends Message {
     Block(NetworkParameters params) {
         super(params);
         // Set up a few basic things. We are not complete after this though.
-        version = 1;
+        version = params.genesisVersion;
         difficultyTarget = 0x1d07fff8L;
         time = System.currentTimeMillis() / 1000;
         prevBlockHash = Sha256Hash.ZERO_HASH;

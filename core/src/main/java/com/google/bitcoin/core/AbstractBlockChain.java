@@ -800,7 +800,7 @@ public abstract class AbstractBlockChain {
      * Throws an exception if the blocks difficulty is not correct.
      */
     private void checkDifficultyTransitions(StoredBlock storedPrev, Block nextBlock) throws BlockStoreException, VerificationException {
-    	/* FIXME
+    !!	/* FIXME
         checkState(lock.isHeldByCurrentThread());
         Block prev = storedPrev.getHeader();
         

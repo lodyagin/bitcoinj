@@ -28,13 +28,13 @@ import java.math.BigInteger;
  */
 public class UnitTestParams extends NetworkParameters {
     public UnitTestParams() {
-        super();
+        super(1 | (13677 << 16));
         id = ID_UNITTESTNET;
-        packetMagic = 0x0b110907;
+        packetMagic = 0x01130607;
         addressHeader = 111;
         p2shHeader = 196;
         acceptableAddressCodes = new int[] { addressHeader, p2shHeader };
-        proofOfWorkLimit = new BigInteger("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", 16);
+        //proofOfWorkLimit = new BigInteger("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", 16);
         genesisBlock.setTime(System.currentTimeMillis() / 1000);
         genesisBlock.setDifficultyTarget(Block.EASIEST_DIFFICULTY_TARGET);
         genesisBlock.solve();

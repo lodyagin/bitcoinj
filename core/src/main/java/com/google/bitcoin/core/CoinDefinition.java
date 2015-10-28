@@ -91,7 +91,7 @@ public class CoinDefinition {
     static public long genesisBlockNonce = (4172846L);                         //main.cpp: LoadBlockIndex
     static public String genesisHash = "0000018b0b21f7829f618e4e679d5ae7f33541189e402c04a91e050970161924"; // NB: PoW hash here
     static public String genesisMerkleRoot = "c900d294567c4363a0d8481f24e635df784e5b480e7b7eb97f0841628fcbe93a";
-    static public int genesisBlockValue = 0;                                                              //main.cpp: LoadBlockIndex
+    static public BigInteger genesisBlockValue = BigInteger.valueOf(35).multiply(Utils.COIN);
     //taken from the raw data of the block explorer
     //static public String genesisTxInBytes = "04ffff001d01044c5957697265642030392f4a616e2f3230313420546865204772616e64204578706572696d656e7420476f6573204c6976653a204f76657273746f636b2e636f6d204973204e6f7720416363657074696e6720426974636f696e73";   //"limecoin se convertira en una de las monedas mas segura del mercado, checa nuestros avances"
     //static public String genesisTxOutBytes = "040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9";
@@ -131,7 +131,7 @@ public class CoinDefinition {
 
     //public static int subsidyDecreaseBlockCount = 4730400;     //main.cpp GetBlockValue(height, fee)
 
-    public static BigInteger proofOfWorkLimit = Utils.decodeCompactBits(0x1f000000L);  //main.cpp bnProofOfWorkLimit (~uint256(0) >> 20); // digitalcoin: starting difficulty is 1 / 2^12
+    //public static BigInteger proofOfWorkLimit = Utils.decodeCompactBits(0x1f000000L);  //pars.h min_difficulty_by_design
 
     static public String[] testnetDnsSeeds = new String[] {
     };

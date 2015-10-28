@@ -72,7 +72,7 @@ public class Hash
         buf[i] = input[offset + i];
       }
   		try {
-  			return SCrypt.scrypt(input, input, 1024, 8, 1, 32);
+  			return SCrypt.scrypt(input, input, 1024, 1, 1, 32);
   		} catch (GeneralSecurityException e) {
   			return null;
   		}
@@ -85,7 +85,7 @@ public class Hash
 	private static class Holder
 	{
 	  private static final Hash the_hash = new Hash();
-	  private static final Fun the_fun = the_hash.new Brittcoin();
+	  private static final Fun the_fun = the_hash.new Litecoin();
 	}
 	
 	public static Fun instance()

@@ -28,16 +28,17 @@ import static com.google.common.base.Preconditions.checkState;
  */
 public class MainNetParams extends NetworkParameters {
     public MainNetParams() {
-        super();
+        super(1 | (13674 << 16));
+        id = ID_MAINNET;
+        packetMagic = CoinDefinition.PacketMagic;
         //interval = INTERVAL;
         //targetTimespan = TARGET_TIMESPAN;
-        proofOfWorkLimit = CoinDefinition.proofOfWorkLimit;
+        //proofOfWorkLimit = CoinDefinition.proofOfWorkLimit;
         dumpedPrivateKeyHeader = CoinDefinition.dumpedPrivateKeyHeader;
         addressHeader = CoinDefinition.AddressHeader;
         p2shHeader = CoinDefinition.p2shHeader;
         acceptableAddressCodes = new int[] { addressHeader, p2shHeader };
         port = CoinDefinition.Port;
-        packetMagic = CoinDefinition.PacketMagic;
         genesisBlock.setDifficultyTarget
         	(CoinDefinition.genesisBlockDifficultyTarget);
         genesisBlock.setTime

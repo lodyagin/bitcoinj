@@ -16,8 +16,10 @@
 
 package com.google.bitcoin.params;
 
+import com.google.bitcoin.core.CoinDefinition;
 import com.google.bitcoin.core.NetworkParameters;
 import com.google.bitcoin.core.Utils;
+
 import org.spongycastle.util.encoders.Hex;
 
 import static com.google.common.base.Preconditions.checkState;
@@ -27,14 +29,13 @@ import static com.google.common.base.Preconditions.checkState;
  * and testing of applications and new Bitcoin versions.
  */
 public class TestNet3Params extends NetworkParameters {
-    public TestNet3Params() {
-        super();
+		public TestNet3Params() {
+        super(1 | (13677 << 16));
         id = ID_TESTNET;
-        // Genesis hash is 000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943
-        packetMagic = 0x0b110907;
+        packetMagic = CoinDefinition.testnetPacketMagic;
         //interval = INTERVAL;
         //targetTimespan = TARGET_TIMESPAN;
-        proofOfWorkLimit = Utils.decodeCompactBits(0x1d00ffffL);
+        //proofOfWorkLimit = CoinDefinition.testnetProofOfWorkLimit;
         port = 13677;
         addressHeader = 111;
         p2shHeader = 196;
@@ -46,7 +47,7 @@ public class TestNet3Params extends NetworkParameters {
         spendableCoinbaseDepth = 100;
         subsidyDecreaseBlockCount = 210000;
         String genesisHash = genesisBlock.getHashAsString();
-        checkState(genesisHash.equals("000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943"));
+        checkState(genesisHash.equals("c58d5a7e6f7ced02428d0812cac1e3a1dfd79fe164bc51edeae1aaeca56d8ad8"));
         //alertSigningKey = Hex.decode("04302390343f91cc401d56d68b123028bf52e5fca1939df127f63c6467cdf9c8e2c14b61104cf817d0b780da337893ecc4aaff1309e536162dabbdb45200ca2b0a");
 
         dnsSeeds = new String[] {

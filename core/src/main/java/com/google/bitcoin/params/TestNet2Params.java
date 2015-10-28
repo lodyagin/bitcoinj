@@ -28,10 +28,10 @@ import static com.google.common.base.Preconditions.checkState;
  */
 public class TestNet2Params extends NetworkParameters {
     public TestNet2Params() {
-        super();
+        super(0);
         //interval = INTERVAL;
         //targetTimespan = TARGET_TIMESPAN;
-        proofOfWorkLimit = CoinDefinition.proofOfWorkLimit;
+        //proofOfWorkLimit = CoinDefinition.proofOfWorkLimit;
         dumpedPrivateKeyHeader = CoinDefinition.dumpedPrivateKeyHeader;
         addressHeader = 0;
         p2shHeader = CoinDefinition.p2shHeader;
