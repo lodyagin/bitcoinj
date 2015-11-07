@@ -41,7 +41,8 @@ public class CoinDefinition {
 
     public static boolean checkpointFileSupport = true;
 
-    //public static final int TARGET_TIMESPAN = (int)(20 * 60); 
+    public static final int TARGET_TIMESPAN = 150; 
+    public static final int TESTNET_TARGET_TIMESPAN = 30; 
     //public static final int TARGET_SPACING = (int)(1 * 60);  
     //public static final int INTERVAL = TARGET_TIMESPAN / TARGET_SPACING;  //36 blocks
 
@@ -131,7 +132,7 @@ public class CoinDefinition {
 
     //public static int subsidyDecreaseBlockCount = 4730400;     //main.cpp GetBlockValue(height, fee)
 
-    //public static BigInteger proofOfWorkLimit = Utils.decodeCompactBits(0x1f000000L);  //pars.h min_difficulty_by_design
+    //public static BigInteger proofOfWorkLimit = Utils.decodeCompactBits(0x1e01f998L);  //pars.h min_difficulty_by_design
 
     static public String[] testnetDnsSeeds = new String[] {
     };

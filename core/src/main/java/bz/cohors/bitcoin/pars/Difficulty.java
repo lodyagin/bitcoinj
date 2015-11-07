@@ -64,7 +64,9 @@ public class Difficulty {
 		
 		return mdbd.longValue();
 	}
-	
+
+	public long nextBlockDifficulty(
+
 }
 
 	

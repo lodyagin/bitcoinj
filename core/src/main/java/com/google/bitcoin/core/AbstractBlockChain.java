@@ -16,6 +16,8 @@
 
 package com.google.bitcoin.core;
 
+import bz.cohors.bitcoin.pars.Difficulty;
+
 import com.google.bitcoin.store.BlockStore;
 import com.google.bitcoin.store.BlockStoreException;
 import com.google.bitcoin.utils.ListenerRegistration;
@@ -106,6 +108,8 @@ public abstract class AbstractBlockChain {
     protected final NetworkParameters params;
     private final CopyOnWriteArrayList<ListenerRegistration<BlockChainListener>> listeners;
 
+    public final Difficulty difficulty;
+    
     // Holds a block header and, optionally, a list of tx hashes or block's transactions
     class OrphanBlock {
         final Block block;
@@ -146,6 +150,7 @@ public abstract class AbstractBlockChain {
         chainHead = blockStore.getChainHead();
         log.info("chain head is at height {}:\n{}", chainHead.getHeight(), chainHead.getHeader());
         this.params = params;
+    		this.difficulty = new Difficulty(this.params.getProofOfWorkLimit());
         this.listeners = new CopyOnWriteArrayList<ListenerRegistration<BlockChainListener>>();
         for (BlockChainListener l : listeners) addListener(l, Threading.SAME_THREAD);
     }
@@ -799,9 +804,13 @@ public abstract class AbstractBlockChain {
     /**
      * Throws an exception if the blocks difficulty is not correct.
      */
-    private void checkDifficultyTransitions(StoredBlock storedPrev, Block nextBlock) throws BlockStoreException, VerificationException {
-    !!	/* FIXME
+    private void checkDifficultyTransitions(StoredBlock storedPrev, Block nextBlock) throws BlockStoreException, VerificationException 
+    {
         checkState(lock.isHeldByCurrentThread());
+        
+        difficulty.nextBlockDifficulty(params.getTargetTimespan());
+        
+/*  
         Block prev = storedPrev.getHeader();
         
         // Is this supposed to be a difficulty transition point?
@@ -868,7 +877,7 @@ public abstract class AbstractBlockChain {
         if (newDifficultyCompact != receivedDifficultyCompact)
             throw new VerificationException("Network provided difficulty bits do not match what was calculated: " +
                     newDifficultyCompact + " vs " + receivedDifficultyCompact);
-                    */
+*/
     }
 
     private void checkTestnetDifficulty(StoredBlock storedPrev, Block prev, Block next) throws VerificationException, BlockStoreException {

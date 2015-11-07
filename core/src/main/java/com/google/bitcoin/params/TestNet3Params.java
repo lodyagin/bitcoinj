@@ -34,8 +34,8 @@ public class TestNet3Params extends NetworkParameters {
         id = ID_TESTNET;
         packetMagic = CoinDefinition.testnetPacketMagic;
         //interval = INTERVAL;
-        //targetTimespan = TARGET_TIMESPAN;
-        //proofOfWorkLimit = CoinDefinition.testnetProofOfWorkLimit;
+        targetTimespan = CoinDefinition.TESTNET_TARGET_TIMESPAN;
+        proofOfWorkLimit = CoinDefinition.genesisBlockDifficultyTarget;
         port = 13677;
         addressHeader = 111;
         p2shHeader = 196;

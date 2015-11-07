@@ -30,20 +30,20 @@ public class TestNet2Params extends NetworkParameters {
     public TestNet2Params() {
         super(0);
         //interval = INTERVAL;
-        //targetTimespan = TARGET_TIMESPAN;
-        //proofOfWorkLimit = CoinDefinition.proofOfWorkLimit;
+        targetTimespan = CoinDefinition.TARGET_TIMESPAN;
+        proofOfWorkLimit = CoinDefinition.testnetGenesisBlockDifficultyTarget;
         dumpedPrivateKeyHeader = CoinDefinition.dumpedPrivateKeyHeader;
-        addressHeader = 0;
-        p2shHeader = CoinDefinition.p2shHeader;
+        addressHeader = CoinDefinition.testnetAddressHeader;
+        p2shHeader = CoinDefinition.testnetp2shHeader;
         acceptableAddressCodes = new int[] { addressHeader, p2shHeader };
-        port = CoinDefinition.Port;
+        port = CoinDefinition.TestPort;
         packetMagic = CoinDefinition.PacketMagic;
         genesisBlock.setDifficultyTarget
-        	(CoinDefinition.genesisBlockDifficultyTarget);
+        	(CoinDefinition.testnetGenesisBlockDifficultyTarget);
         genesisBlock.setTime
-        	(CoinDefinition.genesisBlockTime);
+        	(CoinDefinition.testnetGenesisBlockTime);
         genesisBlock.setNonce
-        	(CoinDefinition.genesisBlockNonce);
+        	(CoinDefinition.testnetGenesisBlockNonce);
         id = ID_MAINNET;
         //subsidyDecreaseBlockCount = 210000;
         //spendableCoinbaseDepth = 100;

@@ -16,6 +16,8 @@
 
 package com.google.bitcoin.params;
 
+import java.math.BigInteger;
+
 import com.google.bitcoin.core.NetworkParameters;
 import com.google.bitcoin.core.Sha256Hash;
 import com.google.bitcoin.core.Utils;
@@ -32,8 +34,8 @@ public class MainNetParams extends NetworkParameters {
         id = ID_MAINNET;
         packetMagic = CoinDefinition.PacketMagic;
         //interval = INTERVAL;
-        //targetTimespan = TARGET_TIMESPAN;
-        //proofOfWorkLimit = CoinDefinition.proofOfWorkLimit;
+        targetTimespan = CoinDefinition.TARGET_TIMESPAN;
+        proofOfWorkLimit = CoinDefinition.genesisBlockDifficultyTarget;
         dumpedPrivateKeyHeader = CoinDefinition.dumpedPrivateKeyHeader;
         addressHeader = CoinDefinition.AddressHeader;
         p2shHeader = CoinDefinition.p2shHeader;

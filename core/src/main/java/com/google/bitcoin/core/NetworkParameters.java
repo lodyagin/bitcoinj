@@ -65,14 +65,14 @@ public abstract class NetworkParameters implements Serializable {
     // TODO: Seed nodes should be here as well.
 
     protected Block genesisBlock;
-    //protected BigInteger proofOfWorkLimit;
+    protected long proofOfWorkLimit;
     protected int port;
     protected long packetMagic;
     protected int addressHeader;
     protected int p2shHeader;
     protected int dumpedPrivateKeyHeader;
     //protected int interval;
-    //protected int targetTimespan;
+    protected int targetTimespan;
     protected byte[] alertSigningKey;
 
     /**
@@ -305,9 +305,9 @@ public abstract class NetworkParameters implements Serializable {
      * significantly different from this value, the network difficulty formula will produce a different value. Both
      * test and production Bitcoin networks use 2 weeks (1209600 seconds).
      */
-    /*public int getTargetTimespan() {
+    public int getTargetTimespan() {
         return targetTimespan;
-    }*/
+    }
 
     /**
      * The version codes that prefix addresses which are acceptable on this network. Although Satoshi intended these to
@@ -331,9 +331,9 @@ public abstract class NetworkParameters implements Serializable {
     }*/
 
     /** What the easiest allowable proof of work should be. */
-    /*public BigInteger getProofOfWorkLimit() {
+    public long getProofOfWorkLimit() {
         return proofOfWorkLimit;
-    }*/
+    }
 
     /**
      * The key used to sign {@link com.google.bitcoin.core.AlertMessage}s. You can use {@link com.google.bitcoin.core.ECKey#verify(byte[], byte[], byte[])} to verify
