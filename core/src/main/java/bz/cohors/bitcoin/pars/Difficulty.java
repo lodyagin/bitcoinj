@@ -3,17 +3,21 @@ package bz.cohors.bitcoin.pars;
 import java.math.BigInteger;
 
 import com.google.bitcoin.core.Block;
+import com.google.bitcoin.core.NetworkParameters;
 import com.google.bitcoin.core.StoredBlock;
 import com.google.bitcoin.store.BlockStore;
 import com.google.bitcoin.store.BlockStoreException;
 
-public class Difficulty {
-
-	public final long minDifficultyByDesign;
+public class Difficulty 
+{
+	protected final NetworkParameters params;
 	
-	public Difficulty(long minDifficulty)
+	//public final long minDifficultyByDesign;
+	
+	public Difficulty(NetworkParameters pars)
 	{
-		minDifficultyByDesign = minDifficulty;
+		params = pars;
+		//minDifficultyByDesign = params.getProofOfWorkLimit();
 	}
 	
 	public long nextBlockDifficulty(
@@ -26,10 +30,10 @@ public class Difficulty {
     try {
 	    prevBlk = lastBlk.getPrev(store);
     } catch (BlockStoreException e) {
-    	return minDifficultyByDesign;
+    	return params.getProofOfWorkLimitCompact();
     }
 		if (prevBlk == null)
-			return minDifficultyByDesign;
+			return params.getProofOfWorkLimitCompact();
 		
 		Block lastHeader = lastBlk.getHeader();
 		Block prevHeader = prevBlk.getHeader();
@@ -58,7 +62,7 @@ public class Difficulty {
     bnNew = bnNew.multiply(BigInteger.valueOf(actualTimespan));
     bnNew = bnNew.divide(BigInteger.valueOf(desiredTimespan));
   
-    BigInteger mdbd = BigInteger.valueOf(minDifficultyByDesign);
+    BigInteger mdbd = params.getProofOfWorkLimit();
     if (bnNew.compareTo(mdbd) > 0)
       bnNew = mdbd;
 		
@@ -66,6 +70,16 @@ public class Difficulty {
 	}
 
 	public long nextBlockDifficulty(
+			BlockStore store,
+			StoredBlock lastBlk
+  )
+	{
+		return nextBlockDifficulty(
+				params.getTargetTimespan(),
+				store,
+				lastBlk
+		);
+	}
 
 }
 

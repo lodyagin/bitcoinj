@@ -96,7 +96,7 @@ public class AddressTest {
         assertEquals(MainNetParams.get().getId(), params.getId());
         if(CoinDefinition.supportsTestNet)
         {
-            params = Address.getParametersFromAddress("n4eA2nbYqErp7H6jebchxAN59DmNpksexv");
+            params = Address.getParametersFromAddress("XYZPJkS5VnSjkRFG3V5zSZux3L48PTDUj8");
             assertEquals(TestNet3Params.get().getId(), params.getId());
         }
     }

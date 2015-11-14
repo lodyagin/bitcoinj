@@ -1623,7 +1623,7 @@ public class FullBlockTestGenerator {
         Integer height = blockToHeightMap.get(baseBlock.getHash());
         if (height != null)
             Preconditions.checkState(height == nextBlockHeight - 1);
-        BigInteger coinbaseValue = Utils.toNanoCoins(50, 0).shiftRight(nextBlockHeight / params.getSubsidyDecreaseBlockCount())
+        BigInteger coinbaseValue = Utils.toNanoCoins(CoinDefinition.getBlockValue(height), 0)
                 .add((prevOut != null ? prevOut.value.subtract(BigInteger.ONE) : BigInteger.ZERO))
                 .add(additionalCoinbaseValue == null ? BigInteger.ZERO : additionalCoinbaseValue);
         Block block = baseBlock.createNextBlockWithCoinbase(coinbaseOutKeyPubKey, coinbaseValue);

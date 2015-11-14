@@ -65,7 +65,7 @@ public abstract class NetworkParameters implements Serializable {
     // TODO: Seed nodes should be here as well.
 
     protected Block genesisBlock;
-    protected long proofOfWorkLimit;
+    protected BigInteger proofOfWorkLimit;
     protected int port;
     protected long packetMagic;
     protected int addressHeader;
@@ -84,8 +84,8 @@ public abstract class NetworkParameters implements Serializable {
     /**
      * The depth of blocks required for a coinbase transaction to be spendable.
      */
-    protected int spendableCoinbaseDepth;
-    protected int subsidyDecreaseBlockCount;
+    protected final int spendableCoinbaseDepth = CoinDefinition.spendableCoinbaseDepth;
+    //protected int subsidyDecreaseBlockCount;
     
     protected int[] acceptableAddressCodes;
     protected String[] dnsSeeds;
@@ -245,9 +245,9 @@ public abstract class NetworkParameters implements Serializable {
         return checkpointHash != null;
     }
 
-    public int getSubsidyDecreaseBlockCount() {
+    /*public int getSubsidyDecreaseBlockCount() {
         return subsidyDecreaseBlockCount;
-    }
+    }*/
 
     /** Returns DNS names that when resolved, give IP addresses of active peers. */
     public String[] getDnsSeeds() {
@@ -331,8 +331,14 @@ public abstract class NetworkParameters implements Serializable {
     }*/
 
     /** What the easiest allowable proof of work should be. */
-    public long getProofOfWorkLimit() {
+    public BigInteger getProofOfWorkLimit() {
         return proofOfWorkLimit;
+    }
+    
+    /** Returns the limit as BigInteger */
+    public long getProofOfWorkLimitCompact()
+    {
+    	return Utils.encodeCompactBits(proofOfWorkLimit);
     }
 
     /**

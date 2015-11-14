@@ -57,7 +57,7 @@ public class CoinDefinition {
             return TARGET_TIMESPAN;   
     }*/
 
-    //public static int spendableCoinbaseDepth = 100; //main.h: static const int COINBASE_MATURITY
+    public static int spendableCoinbaseDepth = 70; //main.h: static const int COINBASE_MATURITY
     public static final BigInteger MAX_MONEY = BigInteger.valueOf(10000000L).multiply(Utils.COIN);                 //main.h:  MAX_MONEY
 
     public static final BigInteger DEFAULT_MIN_TX_FEE = BigInteger.valueOf(1000);   // MIN_TX_FEE
@@ -116,9 +116,25 @@ public class CoinDefinition {
     static public long testnetGenesisBlockTime = 1403787088L;                       //main.cpp: LoadBlockIndex
     static public long testnetGenesisBlockNonce = (41360L);                         //main.cpp: LoadBlockIndex
 
+    public static final int maxMoney = 10000000;
+    public static final int preminedMoney = 1500000;
+    public static final int blockReward = 35;
 
-
-
+    public static final int maxMoneyHeight = 
+    		(maxMoney - preminedMoney)/ blockReward;
+    
+    static int getBlockValue(int height)
+    {
+      int nSubsidy = blockReward;
+      
+      if(height == 1)
+        nSubsidy = preminedMoney;
+      else if (height == maxMoneyHeight + 1)
+        nSubsidy = 5;
+      else if (height > maxMoneyHeight)
+        nSubsidy = 0;
+      return nSubsidy;
+    }
 
     //main.cpp GetBlockValue(height, fee)
     /*public static final BigInteger GetBlockReward(int height)
@@ -154,7 +170,7 @@ public class CoinDefinition {
     }
 
     //Unit Test Information
-    public static final String UNITTEST_ADDRESS = "XCQFRroTc1mU15UdRhRLqaJFP1GVwRR26Z";
+    public static final String UNITTEST_ADDRESS = "CX4g7MN84gWyPgmsyiY8t5iHduF1vbUuM6";
     //public static final String UNITTEST_ADDRESS_PRIVATE_KEY = "XDtvHyDHk4S3WJvwjxSANCpZiLLkKzoDnjrcRhca2iLQRtGEz1JZ";
 
 }

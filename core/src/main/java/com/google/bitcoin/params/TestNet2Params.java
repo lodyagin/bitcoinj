@@ -31,7 +31,7 @@ public class TestNet2Params extends NetworkParameters {
         super(0);
         //interval = INTERVAL;
         targetTimespan = CoinDefinition.TARGET_TIMESPAN;
-        proofOfWorkLimit = CoinDefinition.testnetGenesisBlockDifficultyTarget;
+        proofOfWorkLimit = Utils.decodeCompactBits(CoinDefinition.testnetGenesisBlockDifficultyTarget);
         dumpedPrivateKeyHeader = CoinDefinition.dumpedPrivateKeyHeader;
         addressHeader = CoinDefinition.testnetAddressHeader;
         p2shHeader = CoinDefinition.testnetp2shHeader;

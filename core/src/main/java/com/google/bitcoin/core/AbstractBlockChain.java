@@ -150,7 +150,7 @@ public abstract class AbstractBlockChain {
         chainHead = blockStore.getChainHead();
         log.info("chain head is at height {}:\n{}", chainHead.getHeight(), chainHead.getHeader());
         this.params = params;
-    		this.difficulty = new Difficulty(this.params.getProofOfWorkLimit());
+    		this.difficulty = new Difficulty(this.params);
         this.listeners = new CopyOnWriteArrayList<ListenerRegistration<BlockChainListener>>();
         for (BlockChainListener l : listeners) addListener(l, Threading.SAME_THREAD);
     }
@@ -808,7 +808,7 @@ public abstract class AbstractBlockChain {
     {
         checkState(lock.isHeldByCurrentThread());
         
-        difficulty.nextBlockDifficulty(params.getTargetTimespan());
+        difficulty.nextBlockDifficulty(blockStore, chainHead);
         
 /*  
         Block prev = storedPrev.getHeader();

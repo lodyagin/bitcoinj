@@ -35,7 +35,7 @@ public class MainNetParams extends NetworkParameters {
         packetMagic = CoinDefinition.PacketMagic;
         //interval = INTERVAL;
         targetTimespan = CoinDefinition.TARGET_TIMESPAN;
-        proofOfWorkLimit = CoinDefinition.genesisBlockDifficultyTarget;
+        proofOfWorkLimit = Utils.decodeCompactBits(CoinDefinition.genesisBlockDifficultyTarget);
         dumpedPrivateKeyHeader = CoinDefinition.dumpedPrivateKeyHeader;
         addressHeader = CoinDefinition.AddressHeader;
         p2shHeader = CoinDefinition.p2shHeader;

@@ -160,15 +160,11 @@ public class Block extends Message {
 
     /**
      * <p>A utility method that calculates how much new Bitcoin would be created by the block at the given height.
-     * The inflation of Bitcoin is predictable and drops roughly every 4 years (210,000 blocks). At the dawn of
-     * the system it was 50 coins per block, in late 2012 it went to 25 coins per block, and so on. The size of
+     * The size of
      * a coinbase transaction is inflation plus fees.</p>
-     *
-     * <p>The half-life is controlled by {@link com.google.bitcoin.core.NetworkParameters#getSubsidyDecreaseBlockCount()}.
-     * </p>
      */
     public BigInteger getBlockInflation(int height) {
-        return Utils.toNanoCoins(50, 0).shiftRight(height / params.getSubsidyDecreaseBlockCount());
+        return Utils.toNanoCoins(CoinDefinition.getBlockValue(height), 0);
     }
 
     private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
@@ -639,7 +635,7 @@ public class Block extends Message {
     public BigInteger getDifficultyTargetAsInteger() throws VerificationException {
         maybeParseHeader();
         BigInteger target = Utils.decodeCompactBits(difficultyTarget);
-        if (target.compareTo(BigInteger.ZERO) <= 0 || target.compareTo(params.proofOfWorkLimit) > 0)
+        if (target.compareTo(BigInteger.ZERO) <= 0 || target.compareTo(params.getProofOfWorkLimit()) > 0)
             throw new VerificationException("Difficulty target is bad: " + target.toString());
         return target;
     }

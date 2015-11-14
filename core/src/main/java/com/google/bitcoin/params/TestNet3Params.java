@@ -35,19 +35,22 @@ public class TestNet3Params extends NetworkParameters {
         packetMagic = CoinDefinition.testnetPacketMagic;
         //interval = INTERVAL;
         targetTimespan = CoinDefinition.TESTNET_TARGET_TIMESPAN;
-        proofOfWorkLimit = CoinDefinition.genesisBlockDifficultyTarget;
-        port = 13677;
-        addressHeader = 111;
-        p2shHeader = 196;
+        proofOfWorkLimit = Utils.decodeCompactBits(CoinDefinition.testnetGenesisBlockDifficultyTarget);
+        port = CoinDefinition.TestPort;
+        addressHeader = CoinDefinition.testnetAddressHeader;
+        p2shHeader = CoinDefinition.testnetp2shHeader;
         acceptableAddressCodes = new int[] { addressHeader, p2shHeader };
-        dumpedPrivateKeyHeader = 239;
-        genesisBlock.setTime(1296688602L);
-        genesisBlock.setDifficultyTarget(0x1d00ffffL);
-        genesisBlock.setNonce(414098458);
-        spendableCoinbaseDepth = 100;
-        subsidyDecreaseBlockCount = 210000;
+        dumpedPrivateKeyHeader = CoinDefinition.dumpedPrivateKeyHeader;
+        genesisBlock.setDifficultyTarget
+      	  (CoinDefinition.testnetGenesisBlockDifficultyTarget);
+        genesisBlock.setTime
+      	  (CoinDefinition.testnetGenesisBlockTime);
+        genesisBlock.setNonce
+      	  (CoinDefinition.testnetGenesisBlockNonce);
+        //spendableCoinbaseDepth = 100;
+        //subsidyDecreaseBlockCount = 210000;
         String genesisHash = genesisBlock.getHashAsString();
-        checkState(genesisHash.equals("c58d5a7e6f7ced02428d0812cac1e3a1dfd79fe164bc51edeae1aaeca56d8ad8"));
+        checkState(genesisHash.equals(CoinDefinition.testnetGenesisHash));
         //alertSigningKey = Hex.decode("04302390343f91cc401d56d68b123028bf52e5fca1939df127f63c6467cdf9c8e2c14b61104cf817d0b780da337893ecc4aaff1309e536162dabbdb45200ca2b0a");
 
         dnsSeeds = new String[] {
