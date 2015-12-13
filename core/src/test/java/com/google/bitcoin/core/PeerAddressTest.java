@@ -24,6 +24,7 @@ import java.net.InetAddress;
 
 import static org.junit.Assert.assertEquals;
 
+/*
 public class PeerAddressTest
 {
     @Test
@@ -43,3 +44,4 @@ public class PeerAddressTest
                 Utils.bytesToHexString(pa.bitcoinSerialize()));
     }
 }
+*/

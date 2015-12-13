@@ -67,7 +67,7 @@ public class TransactionBroadcastTest extends TestWithPeerGroup {
         peerGroup.stopAndWait();
     }
 
-    /* TODO
+    // TODO?
     @Test
     public void fourPeers() throws Exception {
         InboundMessageQueuer[] channels = { connectPeer(1), connectPeer(2), connectPeer(3), connectPeer(4) };
@@ -192,5 +192,5 @@ public class TransactionBroadcastTest extends TestWithPeerGroup {
         // Transaction announced to the first peer.
         assertEquals(t3.getHash(), ((Transaction) outbound(p1)).getHash());
     }
-    */
+    
 }

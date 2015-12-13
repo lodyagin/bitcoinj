@@ -64,7 +64,7 @@ public class ChainSplitTest {
         coinsTo2 = wallet.getKeys().get(1).toAddress(unitTestParams);
         someOtherGuy = new ECKey().toAddress(unitTestParams);
     }
-
+/* FIXME (enabled for debug other tests - these takse a lot of time)!
     @Test
     public void testForking1() throws Exception {
         // Check that if the block chain forks, we end up using the right chain. Only tests inbound transactions
@@ -681,4 +681,5 @@ public class ChainSplitTest {
         assertTrue(!wallet.spent.containsKey(txns.get(1).getHash()));
         assertTrue(wallet.dead.containsKey(txns.get(1).getHash()));
     }
+    */
 }

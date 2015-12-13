@@ -25,6 +25,7 @@ import static com.google.common.base.Preconditions.checkState;
 /**
  * Network parameters for the regression test mode of bitcoind in which all blocks are trivially solvable.
  */
+/*
 public class RegTestParams extends TestNet2Params {
     private static final BigInteger PROOF_OF_WORK_LIMIT = new BigInteger("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", 16);
 
@@ -69,3 +70,4 @@ public class RegTestParams extends TestNet2Params {
         return null;
     }
 }
+*/

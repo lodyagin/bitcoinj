@@ -26,6 +26,7 @@ import static com.google.common.base.Preconditions.checkState;
  * Parameters for the old version 2 testnet. This is not useful to you - it exists only because some unit tests are
  * based on it.
  */
+/*
 public class TestNet2Params extends NetworkParameters {
     public TestNet2Params() {
         super(0);
@@ -48,7 +49,7 @@ public class TestNet2Params extends NetworkParameters {
         //subsidyDecreaseBlockCount = 210000;
         //spendableCoinbaseDepth = 100;
         String genesisHash = genesisBlock.getHashAsString();
-        checkState(genesisHash.equals(CoinDefinition.genesisHash),
+        checkState(genesisHash.equals(CoinDefinition.testnetGenesisHash),
                 genesisHash);
 
         dnsSeeds = CoinDefinition.dnsSeeds;
@@ -66,3 +67,4 @@ public class TestNet2Params extends NetworkParameters {
         return null;
     }
 }
+*/

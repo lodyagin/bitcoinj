@@ -148,10 +148,10 @@ public abstract class NetworkParameters implements Serializable {
     }
 
     /** Alias for TestNet2Params.get(), use that instead. */
-    @Deprecated
+    /*@Deprecated
     public static NetworkParameters testNet2() {
         return TestNet2Params.get();
-    }
+    }*/
 
     /** Alias for TestNet3Params.get(), use that instead. */
     @Deprecated
@@ -173,9 +173,9 @@ public abstract class NetworkParameters implements Serializable {
 
     /** Returns a standard regression test params (similar to unitTests) */
     @Deprecated
-    public static NetworkParameters regTests() {
+    /*public static NetworkParameters regTests() {
         return RegTestParams.get();
-    }
+    }*/
 
     /**
      * A Java package style string acting as unique ID for these parameters
@@ -262,8 +262,7 @@ public abstract class NetworkParameters implements Serializable {
      * prevBlockHash pointers in the block headers.</p>
      *
      * <p>The genesis blocks for both test and prod networks contain the timestamp of when they were created,
-     * and a message in the coinbase transaction. It says, <i>"The Times 03/Jan/2009 Chancellor on brink of second
-     * bailout for banks"</i>.</p>
+     * and a message in the coinbase transaction.</p>
      */
     public Block getGenesisBlock() {
         return genesisBlock;

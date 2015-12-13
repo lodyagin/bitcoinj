@@ -2242,7 +2242,7 @@ public class WalletTest extends TestWithWallet {
         Address address = key.toAddress(params);
         Utils.setMockClock();
         Utils.rollMockClock(86400);
-        for (int i = 0; i < 800; i++) {
+        for (int i = 0; i < 40; i++) {
             sendMoneyToWallet(wallet, Utils.CENT, address, AbstractBlockChain.NewBlockType.BEST_CHAIN);
         }
 

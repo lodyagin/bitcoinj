@@ -18,7 +18,8 @@ package com.google.bitcoin.core;
 
 import com.google.bitcoin.core.Wallet.BalanceType;
 import com.google.bitcoin.params.MainNetParams;
-import com.google.bitcoin.params.TestNet2Params;
+import com.google.bitcoin.params.TestNet3Params;
+//import com.google.bitcoin.params.TestNet2Params;
 import com.google.bitcoin.params.UnitTestParams;
 import com.google.bitcoin.store.BlockStore;
 import com.google.bitcoin.store.MemoryBlockStore;
@@ -50,12 +51,12 @@ public class BlockChainTest {
     private final StoredBlock[] block = new StoredBlock[1];
     private Transaction coinbaseTransaction;
 
-    private static class TweakableTestNet2Params extends TestNet2Params {
+    private static class TweakableTestNet3Params extends TestNet3Params {
         public void setProofOfWorkLimit(BigInteger limit) {
             proofOfWorkLimit = limit;
         }
     }
-    private static final TweakableTestNet2Params testNet = new TweakableTestNet2Params();
+    private static final TweakableTestNet3Params testNet = new TweakableTestNet3Params();
 
     private void resetBlockStore() {
         blockStore = new MemoryBlockStore(unitTestParams);

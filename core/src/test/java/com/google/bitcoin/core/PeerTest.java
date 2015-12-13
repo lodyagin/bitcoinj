@@ -99,7 +99,7 @@ public class PeerTest extends TestWithNetworkConnections {
         writeTarget = connect(peer, peerVersion);
     }
 
-    /*
+    // TODO?
     @Test
     public void testAddEventListener() throws Exception {
         connect();
@@ -909,5 +909,5 @@ public class PeerTest extends TestWithNetworkConnections {
                     || (e instanceof SocketException && e.getMessage().equals("Socket is closed")));
         }
     }
-    */
+    
 }
