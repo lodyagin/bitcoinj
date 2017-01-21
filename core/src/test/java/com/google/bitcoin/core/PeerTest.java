@@ -16,6 +16,7 @@
 
 package com.google.bitcoin.core;
 
+import com.google.bitcoin.net.NioClientManager;
 import com.google.bitcoin.params.TestNet3Params;
 import com.google.bitcoin.utils.TestUtils;
 import com.google.bitcoin.utils.Threading;
@@ -28,6 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -51,6 +53,7 @@ import static org.junit.Assert.*;
 
 @RunWith(value = Parameterized.class)
 public class PeerTest extends TestWithNetworkConnections {
+	  private static final org.slf4j.Logger log = LoggerFactory.getLogger(PeerTest.class);
     private Peer peer;
     private InboundMessageQueuer writeTarget;
     private static final int OTHER_PEER_CHAIN_HEIGHT = 110;
@@ -102,7 +105,8 @@ public class PeerTest extends TestWithNetworkConnections {
     // TODO?
     @Test
     public void testAddEventListener() throws Exception {
-        connect();
+    		log.info("testAddEventListener");
+    		connect();
         PeerEventListener listener = new AbstractPeerEventListener();
         peer.addEventListener(listener);
         assertTrue(peer.removeEventListener(listener));
@@ -112,11 +116,13 @@ public class PeerTest extends TestWithNetworkConnections {
     // Check that it runs through the event loop and shut down correctly
     @Test
     public void shutdown() throws Exception {
+    	  log.info("shutdown");
         closePeer(peer);
     }
 
     @Test
     public void chainDownloadEnd2End() throws Exception {
+  	    log.info("chainDownloadEnd2End");
         // A full end-to-end test of the chain download process, with a new block being solved in the middle.
         Block b1 = createFakeBlock(blockStore).block;
         blockChain.add(b1);
@@ -192,6 +198,7 @@ public class PeerTest extends TestWithNetworkConnections {
     // Check that an inventory tickle is processed correctly when downloading missing blocks is active.
     @Test
     public void invTickle() throws Exception {
+    	  log.info("invTickle");
         connect();
 
         Block b1 = createFakeBlock(blockStore).block;
@@ -218,6 +225,7 @@ public class PeerTest extends TestWithNetworkConnections {
     // Check that an inv to a peer that is not set to download missing blocks does nothing.
     @Test
     public void invNoDownload() throws Exception {
+  	    log.info("invNoDownload");
         // Don't download missing blocks.
         peer.setDownloadData(false);
 
@@ -240,6 +248,7 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void invDownloadTx() throws Exception {
+  	    log.info("invDownloadTx");
         connect();
 
         peer.setDownloadData(true);
@@ -264,6 +273,7 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void invDownloadTxMultiPeer() throws Exception {
+  	    log.info("invDownloadTxMultiPeer");
         // Check co-ordination of which peer to download via the memory pool.
         VersionMessage ver = new VersionMessage(unitTestParams, 100);
         InetSocketAddress address = new InetSocketAddress("127.0.0.1", 4242);
@@ -300,6 +310,7 @@ public class PeerTest extends TestWithNetworkConnections {
     // Check that inventory message containing blocks we want is processed correctly.
     @Test
     public void newBlock() throws Exception {
+  	    log.info("newBlock");
         Block b1 = createFakeBlock(blockStore).block;
         blockChain.add(b1);
         final Block b2 = makeSolvedTestBlock(b1);
@@ -360,6 +371,7 @@ public class PeerTest extends TestWithNetworkConnections {
     // Check that it starts downloading the block chain correctly on request.
     @Test
     public void startBlockChainDownload() throws Exception {
+  	  log.info("startBlockChainDownload");
         Block b1 = createFakeBlock(blockStore).block;
         blockChain.add(b1);
         Block b2 = makeSolvedTestBlock(b1);
@@ -388,6 +400,7 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void getBlock() throws Exception {
+  	  log.info("getBlock");
         connect();
 
         Block b1 = createFakeBlock(blockStore).block;
@@ -410,7 +423,8 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void getLargeBlock() throws Exception {
-        connect();
+  	  log.info("getLargeBlock");
+  	  connect();
 
         Block b1 = createFakeBlock(blockStore).block;
         blockChain.add(b1);
@@ -435,6 +449,7 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void fastCatchup() throws Exception {
+  	  log.info("111");
         connect();
         Utils.setMockClock();
         // Check that blocks before the fast catchup point are retrieved using getheaders, and after using getblocks.
@@ -483,7 +498,8 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void pingPong() throws Exception {
-        connect();
+  	  log.info("222");
+connect();
         Utils.setMockClock();
         // No ping pong happened yet.
         assertEquals(Long.MAX_VALUE, peer.getLastPingTime());
@@ -514,12 +530,14 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void recursiveDownloadNew() throws Exception {
-        recursiveDownload(true);
+  	  log.info("333");
+recursiveDownload(true);
     }
 
     @Test
     public void recursiveDownloadOld() throws Exception {
-        recursiveDownload(false);
+  	  log.info("444");
+recursiveDownload(false);
     }
 
     public void recursiveDownload(boolean useNotFound) throws Exception {
@@ -640,12 +658,14 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void timeLockedTransactionNew() throws Exception {
-        timeLockedTransaction(true);
+  	  log.info("555");
+timeLockedTransaction(true);
     }
 
     @Test
     public void timeLockedTransactionOld() throws Exception {
-        timeLockedTransaction(false);
+  	  log.info("666");
+timeLockedTransaction(false);
     }
 
     public void timeLockedTransaction(boolean useNotFound) throws Exception {
@@ -698,7 +718,9 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void rejectTimeLockedDependencyNew() throws Exception {
-        // Check that we also verify the lock times of dependencies. Otherwise an attacker could still build a tx that
+  	  log.info("777");
+  
+    	// Check that we also verify the lock times of dependencies. Otherwise an attacker could still build a tx that
         // looks legitimate and useful but won't actually ever confirm, by sending us a normal tx that spends a
         // timelocked tx.
         checkTimeLockedDependency(false, true);
@@ -706,12 +728,15 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void acceptTimeLockedDependencyNew() throws Exception {
-        checkTimeLockedDependency(true, true);
+  	  log.info("888");
+ 
+    	checkTimeLockedDependency(true, true);
     }
 
     @Test
     public void rejectTimeLockedDependencyOld() throws Exception {
-        // Check that we also verify the lock times of dependencies. Otherwise an attacker could still build a tx that
+  	  log.info("999");
+// Check that we also verify the lock times of dependencies. Otherwise an attacker could still build a tx that
         // looks legitimate and useful but won't actually ever confirm, by sending us a normal tx that spends a
         // timelocked tx.
         checkTimeLockedDependency(false, false);
@@ -719,7 +744,8 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void acceptTimeLockedDependencyOld() throws Exception {
-        checkTimeLockedDependency(true, false);
+  	  log.info("101010");
+checkTimeLockedDependency(true, false);
     }
 
     private void checkTimeLockedDependency(boolean shouldAccept, boolean useNotFound) throws Exception {
@@ -786,7 +812,8 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void disconnectOldVersions1() throws Exception {
-        // Set up the connection with an old version.
+  	  log.info("111111");
+// Set up the connection with an old version.
         final SettableFuture<Void> connectedFuture = SettableFuture.create();
         final SettableFuture<Void> disconnectedFuture = SettableFuture.create();
         peer.addEventListener(new AbstractPeerEventListener() {
@@ -816,7 +843,9 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void exceptionListener() throws Exception {
-        wallet.addEventListener(new AbstractWalletEventListener() {
+  	  log.info("121212");
+  
+    	wallet.addEventListener(new AbstractWalletEventListener() {
             @Override
             public void onCoinsReceived(Wallet wallet, Transaction tx, BigInteger prevBalance, BigInteger newBalance) {
                 throw new NullPointerException("boo!");
@@ -857,6 +886,8 @@ public class PeerTest extends TestWithNetworkConnections {
 
     @Test
     public void badMessage() throws Exception {
+  	  log.info("131313");
+
         // Bring up an actual network connection and feed it bogus data.
         final SettableFuture<Void> result = SettableFuture.create();
         Threading.uncaughtExceptionHandler = new Thread.UncaughtExceptionHandler() {
