@@ -20,7 +20,6 @@ import com.google.bitcoin.core.*;
 import com.google.bitcoin.crypto.KeyCrypterException;
 import com.google.bitcoin.kits.WalletAppKit;
 import com.google.bitcoin.params.MainNetParams;
-import com.google.bitcoin.params.RegTestParams;
 import com.google.bitcoin.params.TestNet3Params;
 import com.google.bitcoin.utils.BriefLogFormatter;
 import com.google.common.util.concurrent.FutureCallback;
@@ -55,7 +54,7 @@ public class ForwardingService {
             params = TestNet3Params.get();
             filePrefix = "forwarding-service-testnet";
         } else if (args.length > 1 && args[1].equals("regtest")) {
-            params = RegTestParams.get();
+            params = TestNet3Params.get();
             filePrefix = "forwarding-service-regtest";
         } else {
             params = MainNetParams.get();
@@ -67,7 +66,7 @@ public class ForwardingService {
         // Start up a basic app using a class that automates some boilerplate.
         kit = new WalletAppKit(params, new File("."), filePrefix);
 
-        if (params == RegTestParams.get()) {
+        if (params == TestNet3Params.get()) {
             // Regression test mode is designed for testing and development only, so there's no public network for it.
             // If you pick this mode, you're expected to be running a local "bitcoind -regtest" instance.
             kit.connectToLocalHost();
